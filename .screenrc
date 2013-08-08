@@ -1,0 +1,37 @@
+autodetach on
+bell_msg "^G"
+defkanji utf-8
+defencoding utf-8
+encoding utf-8 utf-8
+defscrollback 10000
+escape ^Jj
+startup_message off
+vbell off
+#caption always "%{= wb} %-w%{=bu ck}%n %t%{-}%+w"
+#hardstatus alwayslastline "%= %{=b wk} [%l] %{=b wb}%y/%m/%d %{=b wm}%c"
+hardstatus alwayslastline "%-w%{=bu ck}%n %t%{-}%+w"
+caption always "%= [%l] %{=b wb}%y/%m/%d %{=b wm}%c"
+termcapinfo xterm 'Co#256:pa#32767:AB=\E[48;5;%dm:AF=\E[38;5;%dm:'
+termcap  xterm|kterm|teraterm|putty 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+terminfo xterm|kterm|teraterm|putty 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+termcap  kterm|teraterm|putty ti=\E7\E[?47l
+terminfo kterm|teraterm|putty ti=\E7\E[?47l
+bind n screen
+bind k prev
+bind j next
+bind l windowlist -b
+bind v split -v
+bind L layout show 
+bind K layout prev
+bind J layout next
+
+#windowlist string '%3n %f%t%=%h%='
+windowlist title '%{u .g}Num Flags Title %='
+windowlist string "%4n %f%09=%{-} %{.d}%t %="
+maxwin 2048
+
+defmousetrack off
+mousetrack off
+
+#shell /bin/zsh
+

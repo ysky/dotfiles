@@ -97,16 +97,18 @@ setopt long_list_jobs
 export LANG=ja_JP.utf-8
 export TERM=xterm
 export LESS='-c -i -X -R -F'
-export EDITOR=vim
 
 alias du='du -h'
 alias df='df -h'
 alias ll='ls -l --color=tty'
 if [ -e /usr/local/bin/vim ]; then
   alias vi='/usr/local/bin/vim'
+  export EDITOR=/usr/local/bin/vim
 else
   alias vi='vim'
+  export EDITOR=vim
 fi
+
 alias grep='grep --color=auto'
 alias rmrf='rm -rf'
 alias ctags='ctags -f .tags'

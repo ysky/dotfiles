@@ -101,6 +101,7 @@ export LESS='-c -i -X -R -F'
 alias du='du -h'
 alias df='df -h'
 alias ll='ls -l --color=tty'
+alias lla='ls -la --color=tty'
 if [ -e /usr/local/bin/vim ]; then
   alias vi='/usr/local/bin/vim'
   export EDITOR=/usr/local/bin/vim

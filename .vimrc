@@ -26,7 +26,8 @@ set autoindent
 set nocompatible
 set incsearch
 syntax on
-filetype plugin indent on
+"filetype plugin indent on
+filetype indent on
 set backspace=indent,eol,start
 set number
 "setlocal cursorline

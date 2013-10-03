@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: view.vim
 " AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 06 Aug 2013.
+" Last Modified: 19 Sep 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -251,10 +251,10 @@ function! unite#view#_resize_window() "{{{
     return
   endif
 
-  if context.auto_resize
+  if context.auto_resize && line('.') == unite.prompt_linenr
     " Auto resize.
-    let max_len = unite.prompt_linenr + len(unite.current_candidates)
-    execute 'resize' min([max_len, context.winheight])
+    let max_len = unite.prompt_linenr + len(unite.candidates)
+    silent! execute 'resize' min([max_len, context.winheight])
     if line('.') <= winheight(0)
       normal! zb
     endif
@@ -380,8 +380,7 @@ function! unite#view#_close(buffer_name)  "{{{
   let buffer_name = a:buffer_name
   if buffer_name !~ '@\d\+$'
     " Add postfix.
-    let prefix = unite#util#is_windows() ?
-          \ '[unite] - ' : '*unite* - '
+    let prefix = '[unite] - '
     let prefix .= buffer_name
     let buffer_name .= unite#helper#get_postfix(
           \ prefix, 0, tabpagebuflist(tabpagenr()))

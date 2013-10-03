@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: rec.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 30 Jul 2013.
+" Last Modified: 28 Sep 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -37,12 +37,13 @@ call unite#util#set_default(
       \ 'g:unite_source_rec_min_cache_files', 100,
       \ 'g:unite_source_file_rec_min_cache_files')
 call unite#util#set_default(
-      \ 'g:unite_source_rec_max_cache_files', 1000,
+      \ 'g:unite_source_rec_max_cache_files', 2000,
       \ 'g:unite_source_file_rec_max_cache_files')
+call unite#util#set_default('g:unite_source_rec_unit', 200)
 call unite#util#set_default(
       \ 'g:unite_source_rec_async_command',
       \ (executable('ag') ?
-      \  'ag --nocolor --nogroup --ignore ' .
+      \  'ag --nocolor --nogroup --skip-vcs-ignores --ignore ' .
       \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'' --hidden -g ""' :
       \  !unite#util#is_windows() && executable('find') ? 'find' : ''),
       \ 'g:unite_source_file_rec_async_command')
@@ -98,7 +99,8 @@ function! s:source_file_rec.async_gather_candidates(args, context) "{{{
   let continuation = a:context.source__continuation
 
   let [continuation.rest, files] =
-        \ s:get_files(a:context, continuation.rest, 1, 20,
+        \ s:get_files(a:context, continuation.rest,
+        \   1, g:unite_source_rec_unit,
         \   a:context.source.ignore_pattern)
 
   if empty(continuation.rest) || len(continuation.files) >
@@ -329,21 +331,7 @@ function! s:source_file_async.async_gather_candidates(args, context) "{{{
   endif
 
   let continuation = a:context.source__continuation
-
   let stdout = a:context.source__proc.stdout
-  if stdout.eof || len(continuation.files) >
-        \        g:unite_source_rec_max_cache_files
-    " Disable async.
-    if stdout.eof
-      call unite#print_source_message(
-            \ 'Directory traverse was completed.', self.name)
-    else
-      call unite#print_source_message(
-            \ 'Too many candiates.', self.name)
-    endif
-    let a:context.is_async = 0
-    let continuation.end = 1
-  endif
 
   let candidates = []
   for filename in map(filter(
@@ -358,6 +346,22 @@ function! s:source_file_async.async_gather_candidates(args, context) "{{{
             \ })
     endif
   endfor
+
+  if stdout.eof || len(continuation.files) >
+        \        g:unite_source_rec_max_cache_files
+    " Disable async.
+    if stdout.eof
+      call unite#print_source_message(
+            \ 'Directory traverse was completed.', self.name)
+    else
+      call unite#print_source_message(
+            \ 'Too many candiates.', self.name)
+    endif
+    let a:context.is_async = 0
+    let continuation.end = 1
+
+    call a:context.source__proc.waitpid()
+  endif
 
   let continuation.files += candidates
   if stdout.eof
@@ -374,7 +378,7 @@ function! s:source_file_async.hooks.on_init(args, context) "{{{
 endfunction"}}}
 function! s:source_file_async.hooks.on_close(args, context) "{{{
   if has_key(a:context, 'source__proc')
-    call a:context.source__proc.waitpid()
+    call a:context.source__proc.kill()
   endif
 endfunction "}}}
 
@@ -401,83 +405,6 @@ function! s:source_directory_async.hooks.on_init(args, context) "{{{
   let a:context.source__is_directory = 1
   call s:on_init(a:args, a:context)
 endfunction"}}}
-
-" Add custom action table. "{{{
-let s:cdable_action_rec = {
-      \ 'description' : 'open this directory by file_rec source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec.func(candidate)
-  call unite#start_script([['file_rec', a:candidate.action__directory]])
-endfunction
-
-let s:cdable_action_rec_parent = {
-      \ 'description' : 'open parent directory by file_rec source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec_parent.func(candidate)
-  call unite#start_script([['file_rec', unite#util#substitute_path_separator(
-        \ fnamemodify(a:candidate.action__directory, ':h'))
-        \ ]])
-endfunction
-
-let s:cdable_action_rec_project = {
-      \ 'description' : 'open project directory by file_rec source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec_project.func(candidate)
-  call unite#start_script([['file_rec', unite#util#substitute_path_separator(
-        \ unite#util#path2project_directory(a:candidate.action__directory))
-        \ ]])
-endfunction
-
-let s:cdable_action_rec_async = {
-      \ 'description' : 'open this directory by file_rec/async source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec_async.func(candidate)
-  call unite#start_script([['file_rec/async', a:candidate.action__directory]])
-endfunction
-
-let s:cdable_action_rec_parent_async = {
-      \ 'description' : 'open parent directory by file_rec/async source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec_parent_async.func(candidate)
-  call unite#start_script([['file_rec/async', unite#util#substitute_path_separator(
-        \ fnamemodify(a:candidate.action__directory, ':h'))
-        \ ]])
-endfunction
-
-let s:cdable_action_rec_project_async = {
-      \ 'description' : 'open project directory by file_rec/async source',
-      \ 'is_start' : 1,
-      \}
-
-function! s:cdable_action_rec_project_async.func(candidate)
-  call unite#start_script([['file_rec/async', unite#util#substitute_path_separator(
-        \ unite#util#path2project_directory(a:candidate.action__directory))
-        \ ]])
-endfunction
-
-call unite#custom_action('cdable', 'rec', s:cdable_action_rec)
-call unite#custom_action('cdable', 'rec_parent', s:cdable_action_rec_parent)
-call unite#custom_action('cdable', 'rec_project', s:cdable_action_rec_project)
-call unite#custom_action('cdable', 'rec/async', s:cdable_action_rec_async)
-call unite#custom_action('cdable', 'rec_parent/async', s:cdable_action_rec_parent_async)
-call unite#custom_action('cdable', 'rec_project/async', s:cdable_action_rec_project_async)
-unlet! s:cdable_action_rec
-unlet! s:cdable_action_rec_async
-unlet! s:cdable_action_rec_project
-unlet! s:cdable_action_rec_project_async
-unlet! s:cdable_action_rec_parent
-unlet! s:cdable_action_rec_parent_async
-"}}}
 
 " Misc.
 function! s:get_path(args, context) "{{{
@@ -508,7 +435,7 @@ function! s:get_path(args, context) "{{{
 
   return directory
 endfunction"}}}
-function! s:get_files(context, files, level, max_len, ignore_pattern) "{{{
+function! s:get_files(context, files, level, max_unit, ignore_pattern) "{{{
   let continuation_files = []
   let ret_files = []
   let files_index = 0
@@ -563,10 +490,10 @@ function! s:get_files(context, files, level, max_len, ignore_pattern) "{{{
             let ret_files_len += 1
           endif
 
-          if a:level < 5 && ret_files_len < a:max_len
+          if a:level < 5 && ret_files_len < a:max_unit
             let [continuation_files_child, ret_files_child] =
                   \ s:get_files(a:context, [child], a:level + 1,
-                  \  a:max_len - ret_files_len, a:ignore_pattern)
+                  \  a:max_unit - ret_files_len, a:ignore_pattern)
             let continuation_files += continuation_files_child
 
             if !a:context.source__is_directory
@@ -581,7 +508,7 @@ function! s:get_files(context, files, level, max_len, ignore_pattern) "{{{
 
           let ret_files_len += 1
 
-          if ret_files_len > a:max_len
+          if ret_files_len > a:max_unit
             let continuation_files += children[child_index :]
             break
           endif
@@ -592,7 +519,7 @@ function! s:get_files(context, files, level, max_len, ignore_pattern) "{{{
       let ret_files_len += 1
     endif
 
-    if ret_files_len > a:max_len
+    if ret_files_len > a:max_unit
       break
     endif
   endfor

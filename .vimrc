@@ -12,7 +12,7 @@ Bundle "tpope/vim-rails"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-endwise"
 Bundle "Shougo/unite.vim"
-Bundle "h1mesuke/unite-outline"
+Bundle "Shougo/unite-outline"
 Bundle "ervandew/supertab"
 Bundle "ruby-matchit"
 Bundle "slim-template/vim-slim"
@@ -91,8 +91,8 @@ let howm_fileencoding    = 'utf-8'
 let howm_fileformat      = 'unix'
 
 " unite.vim
-let g:unite_enable_split_vertically=1
-noremap <C-u> :Unite -buffer-name=files file buffer file_mru<CR>
+"let g:unite_enable_split_vertically=1
+"noremap <C-u> :Unite -buffer-name=files file buffer file_mru<CR>
 
 " unite-outline.vim
 noremap <C-u><C-o> :Unite outline<CR>

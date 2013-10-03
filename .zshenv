@@ -1,5 +1,5 @@
 # PASH
-export PATH=${HOME}/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=${HOME}/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 
 # bundler-exec
 if [ -e ~/.zsh/bundler-exec.sh ]; then

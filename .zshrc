@@ -72,9 +72,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' keep-prefix
 zstyle ':completion:*:default' list-colors ''
-#zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' verbose yes
-zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
 setopt list_types
 
 # share command history data

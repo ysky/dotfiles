@@ -6,6 +6,7 @@ set rtp+=~/.vim/vundle/
 call vundle#rc()
 
 " plugins
+Bundle 'gmarik/vundle'
 Bundle "Align"
 Bundle "QuickBuf"
 Bundle "tpope/vim-rails"

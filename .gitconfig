@@ -1,0 +1,9 @@
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  editor = /usr/local/bin/vim -c \"set fenc=utf-8\"
+[user]
+  name = inoue_yusuke
+  email = inoue_yusuke@nintendo.co.jp

@@ -17,6 +17,7 @@ Bundle "Shougo/unite-outline"
 Bundle "ervandew/supertab"
 Bundle "ruby-matchit"
 Bundle "slim-template/vim-slim"
+Bundle "plasticboy/vim-markdown"
 
 set t_Co=256
 

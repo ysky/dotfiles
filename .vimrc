@@ -117,3 +117,10 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
+
+" 不可視文字の可視化
+set lcs=tab:>-,trail:_,extends:\
+set list
+highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
+highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
+au BufRead,BufNew * match JpSpace /　/

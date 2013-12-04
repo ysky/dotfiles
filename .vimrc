@@ -37,7 +37,13 @@ set number
 "autocmd WinLeave * setlocal nocursorline
 
 set laststatus=2
-set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ENC=%{&fileencoding}]\ [POS=%l,%v][LEN=%L]\ [%p%%]
+"set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ENC=%{&fileencoding}]\ [POS=%l,%v][LEN=%L]\ [%p%%]
+let &statusline = ''
+let &statusline .= '%f%m%r%h%w'
+let &statusline .= ' [FORMAT=%{&ff}][TYPE=%Y][ENC=%{&fileencoding}]'
+let &statusline .= '%{&bomb ? "[BOM]" : ""}'
+let &statusline .= ' [POS=%l,%v][LEN=%L][%p%%]'
+
 hi StatusLine term=NONE cterm=NONE ctermfg=white ctermbg=blue
 
 nnoremap j gj

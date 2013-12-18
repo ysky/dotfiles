@@ -65,6 +65,9 @@ inoremap <C-e> <Esc>$a
 let mapleader = " "
 let g:mapleader = " "
 
+" colorscheme
+colorscheme hybrid
+highlight Normal ctermbg=none
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4

@@ -40,6 +40,7 @@ SAVEHIST=500000
 DIRSTACKSIZE=100
 
 setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
 
 # ignore duplication command history list
 setopt hist_ignore_dups

@@ -16,10 +16,22 @@ setopt NOBGNICE
 #setopt HUP
 
 ## history
+HISTFILE=~/.zsh_history
+HISTSIZE=500000
+SAVEHIST=500000
+DIRSTACKSIZE=100
+
 #setopt APPEND_HISTORY
 ## for sharing history between zsh processes
 #setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
+# ignore duplication command history list
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_expire_dups_first
+setopt hist_reduce_blanks
+setopt extended_history
+setopt inc_append_history
 
 ## never ever beep ever
 setopt NO_BEEP
@@ -33,22 +45,8 @@ setopt NO_BEEP
 autoload -U colors
 colors
 
-# history settings
-HISTFILE=~/.zsh_history
-HISTSIZE=500000
-SAVEHIST=500000
-DIRSTACKSIZE=100
-
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
-
-# ignore duplication command history list
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-setopt hist_expire_dups_first
-setopt hist_reduce_blanks
-setopt extended_history
-setopt inc_append_history
 
 setopt prompt_subst
 PROMPT="[%n@%m]%% "
@@ -97,8 +95,6 @@ export LANG=ja_JP.utf-8
 export TERM=xterm
 export LESS='-c -i -X -R -F'
 
-alias du='du -h'
-alias df='df -h'
 alias ll='ls -l --color=tty'
 alias lla='ls -la --color=tty'
 if [ -e /usr/local/bin/vim ]; then

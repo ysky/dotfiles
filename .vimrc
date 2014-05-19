@@ -19,6 +19,7 @@ Bundle "ruby-matchit"
 Bundle "slim-template/vim-slim"
 Bundle "plasticboy/vim-markdown"
 Bundle "itchyny/lightline.vim"
+Bundle "rodjek/vim-puppet"
 
 set t_Co=256
 

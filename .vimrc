@@ -22,17 +22,26 @@ Bundle "itchyny/lightline.vim"
 
 set t_Co=256
 
+" ----------------------------------------------
+"  基本設定
+" ----------------------------------------------
+set autoread                   " 他で変更があったら自動で読み込み
+set ai                         " auto indent
+set shiftwidth=2               " インデント幅は2
 set tabstop=2
-set shiftwidth=2
-set expandtab
-set autoindent
-set nocompatible
+set expandtab                  " tabをホワイトスペースにする
+set number                     " 行数を表示
+set backspace=indent,eol,start " バックスペースですべて消せるようにする
+set formatoptions=lmoq         " テキスト整形オプション，マルチバイト系を追加
+set vb t_vb=                   " ビープを鳴らさない
+set nobackup                   " バックアップファイルを作らない
+set nocompatible " 互換もモードを禁止
 set incsearch
-syntax on
-"filetype plugin indent on
+syntax on " syntax ハイライトをon
+filetype on
+" filetype indent plugin on
 filetype indent on
-set backspace=indent,eol,start
-set number
+
 "setlocal cursorline
 "autocmd WinEnter * setlocal cursorline
 "autocmd WinLeave * setlocal nocursorline
@@ -46,6 +55,27 @@ let &statusline .= '%{&bomb ? "[BOM]" : ""}'
 let &statusline .= ' [POS=%l,%v][LEN=%L][%p%%]'
 
 hi StatusLine term=NONE cterm=NONE ctermfg=white ctermbg=blue
+
+" OSのクリップボードを使用する
+set clipboard+=unnamed
+
+" for mac os x
+" iTerm2でモードによってカーソルを変更
+if has("mac")
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  set ambiwidth=double
+endif
+
+" ノーマルモードに戻った時にすぐにカーソルが変化するように
+inoremap <Esc> <Esc>gg`]
+
+" 挿入モードでCtrl+kでクリップボードの内容を貼り付けられるように
+imap <C-K> <ESC>"*pa
+
+" Ev/Rvでvimrcを編集/再読込できるように
+command! Ev edit $MYVIMRC
+command! Rv source $MYVIMRC
 
 nnoremap j gj
 nnoremap k gk
@@ -84,13 +114,16 @@ set splitbelow
 ":source %
 "でインストールパスを変更して対応
 
-"surround.vim
-let g:surround_37 = "<% \r %>"  " %で<% %>くくり
-let g:surround_61 = "<%= \r %>" " =で<%= %>くくり
+" surround.vimのrailsカスタム
+" let g:surround_37 = "<% \r %>"  " %で<% %>くくり
+" let g:surround_61 = "<%= \r %>" " =で<%= %>くくり
+let g:surround_{char2nr("%")} = "<% \r %>"
+let g:surround_{char2nr("=")} = "<%= \r %>"
+let g:surround_{char2nr("!")} = "<!-- \r -->"
 
 "for rspec files
-autocmd BufRead *_spec.rb syn keyword rubyRspec describe context shared_examples_for shared_context let
-highlight def link rubyRspec Function
+" autocmd BufRead *_spec.rb syn keyword rubyRspec describe context shared_examples_for shared_context let
+" highlight def link rubyRspec Function
 
 " qfixapp.vim
 set runtimepath+=~/.vim/bundle/qfixapp.vim
@@ -106,8 +139,31 @@ let howm_fileformat      = 'unix'
 "let g:unite_enable_split_vertically=1
 "noremap <C-u> :Unite -buffer-name=files file buffer file_mru<CR>
 
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+" 常用セット
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+" 全部乗せ
+nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+
 " unite-outline.vim
 noremap <C-u><C-o> :Unite outline<CR>
+
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 " srcexpl.vim
 let g:SrcExpl_winHeight = 8

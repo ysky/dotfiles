@@ -20,6 +20,7 @@ Bundle "slim-template/vim-slim"
 Bundle "plasticboy/vim-markdown"
 Bundle "itchyny/lightline.vim"
 Bundle "rodjek/vim-puppet"
+Bundle "kchmck/vim-coffee-script"
 
 set t_Co=256
 

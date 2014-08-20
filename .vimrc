@@ -70,7 +70,7 @@ if has("mac")
 endif
 
 " ノーマルモードに戻った時にすぐにカーソルが変化するように
-inoremap <Esc> <Esc>gg`]
+"inoremap <Esc> <Esc>gg`]
 
 " 挿入モードでCtrl+kでクリップボードの内容を貼り付けられるように
 imap <C-K> <ESC>"*pa

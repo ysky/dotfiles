@@ -137,5 +137,8 @@ hardstatus alwayslastline '%m/%d %{= .m}%02c:%s%{-} %L=%-w%45L>%{=bu ck}%n %t%{-
 # The capitalized versions of the letter specify bright colors.
 # You can also use the pseudo-color `i' to set just the brightness and leave the color unchanged.
 
+screen -t home
+screen -t root
+
 # include hostlocal .screenrc
 source '~/.screenrc.local'

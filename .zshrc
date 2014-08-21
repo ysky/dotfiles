@@ -45,8 +45,11 @@ setopt NO_BEEP
 autoload -U colors
 colors
 
+DIRSTACKSIZE=100
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
+
+autoload -Uz compinit && compinit
 
 setopt prompt_subst
 PROMPT="[%n@%m]%% "

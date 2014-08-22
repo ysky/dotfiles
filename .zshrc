@@ -118,7 +118,7 @@ stty stop undef
 # cd するたびにllをたたく.ただし50個以上項目がある場合は個数の表示にとどめる
 function chpwd() {
   if [ $(ls -l | wc -l) -le 50 ]; then
-    ls -l
+    ls -l --color=tty
   else
     echo "$(ls -l | wc -l) items exist in `pwd`"
   fi

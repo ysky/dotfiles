@@ -19,7 +19,10 @@ function within-bundled-project() {
 
 function run-with-bundler()
 {
-  if bundler-installed && within-bundled-project; then
+  # for rails 4.1~
+  if [ -e ./bin/$1 ]; then
+    ./bin/$1
+  elif bundler-installed && within-bundled-project; then
     bundle exec $@
   else
     $@
@@ -28,7 +31,7 @@ function run-with-bundler()
 
 ## Main program
 
-BUNDLED_COMMANDS=( cap capify cucumber rackup rails rake rspec ruby sass sass-convert serve spec unicorn unicorn_rails)
+BUNDLED_COMMANDS=( cap capify cucumber rackup rails rake rspec ruby sass sass-convert serve spec unicorn unicorn_rails spring)
 
 for CMD in $BUNDLED_COMMANDS; do
   if [[ $CMD != "bundle" && $CMD != "gem" ]]; then

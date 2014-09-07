@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: output.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 22 Jun 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -46,25 +45,30 @@ let s:source = {
 function! s:source.hooks.on_init(args, context) "{{{
   if type(get(a:args, 0, '')) == type([])
     " Use args directly.
+    let a:context.source__is_dummy = 0
     return
   endif
 
-  let command = join(a:args, ' ')
+  let command = join(filter(copy(a:args), "v:val !=# '!'"), ' ')
   if command == ''
     let command = unite#util#input(
           \ 'Please input Vim command: ', '', 'command')
     redraw
   endif
   let a:context.source__command = command
+  let a:context.source__is_dummy =
+        \ (get(a:args, -1, '') ==# '!')
 
-  call unite#print_source_message('command: ' . command, s:source.name)
+  if !a:context.source__is_dummy
+    call unite#print_source_message('command: ' . command, s:source.name)
+  endif
 endfunction"}}}
 function! s:source.hooks.on_syntax(args, context) "{{{
   let save_current_syntax = get(b:, 'current_syntax', '')
   unlet! b:current_syntax
 
   try
-    syntax include @Vim syntax/vim.vim
+    silent! syntax include @Vim syntax/vim.vim
     syntax region uniteSource__OutputVim
           \ start=' ' end='$' contains=@Vim containedin=uniteSource__Output
   finally
@@ -86,16 +90,18 @@ function! s:source.gather_candidates(args, context) "{{{
   return map(result, "{
         \ 'word' : v:val,
         \ 'is_multiline' : 1,
+        \ 'is_dummy' : a:context.source__is_dummy,
         \ }")
 endfunction"}}}
 function! s:source.complete(args, context, arglead, cmdline, cursorpos) "{{{
-  if !exists('*neocomplcache#sources#vim_complete#helper#command')
+  if !exists('*neocomplete#initialize')
     return []
   endif
 
-  let pattern = '\.\%(\h\w*\)\?$\|' . neocomplcache#get_keyword_pattern_end('vim')
-  let [cur_keyword_pos, cur_keyword_str] = neocomplcache#match_word(a:arglead, pattern)
-  return map(neocomplcache#sources#vim_complete#helper#command(
+  let pattern = '\.\%(\h\w*\)\?$\|' .
+        \ neocomplete#get_keyword_pattern_end('vim')
+  let cur_keyword_str = neocomplete#match_word(a:arglead, pattern)[1]
+  return map(neocomplete#sources#vim#helper#command(
         \ a:arglead, cur_keyword_str), 'v:val.word')
 endfunction"}}}
 

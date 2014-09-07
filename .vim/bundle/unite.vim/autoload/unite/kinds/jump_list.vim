@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: jump_list.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 26 Sep 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -52,14 +51,21 @@ function! unite#kinds#jump_list#define() "{{{
         \ }
   function! kind.action_table.open.func(candidates) "{{{
     for candidate in a:candidates
-      let bufnr = s:open(candidate)
+      " Save current line in jump_list
+      execute 'normal!' line('.').'G'
+
+      if s:convert_path(bufname('%')) !=#
+            \ s:convert_path(s:get_filename(candidate))
+        let bufnr = s:open(candidate)
+        call unite#remove_previewed_buffer_list(bufnr)
+      endif
+
       call s:jump(candidate, 0)
 
       " Open folds.
       normal! zv
       call s:adjust_scroll(s:best_winline())
-
-      call unite#remove_previewed_buffer_list(bufnr)
+      call s:clear_highlight()
     endfor
   endfunction"}}}
 
@@ -69,34 +75,29 @@ function! unite#kinds#jump_list#define() "{{{
         \ }
   function! kind.action_table.preview.func(candidate) "{{{
     let filename = s:get_filename(a:candidate)
-    let buflisted = buflisted(
-          \ unite#util#escape_file_searching(filename))
+    let bufwinnr = bufwinnr(filename)
+    let buflisted = buflisted(filename)
     let preview_windows = filter(range(1, winnr('$')),
           \ 'getwinvar(v:val, "&previewwindow") != 0')
     if empty(preview_windows)
-      noautocmd silent execute 'pedit!' fnameescape(filename)
-      if !buflisted
-        let prev_winnr = winnr('#')
-        let winnr = winnr()
-        wincmd P
-        doautoall BufRead
-        setlocal nomodified
-        execute prev_winnr.'wincmd w'
-        execute winnr.'wincmd w'
-      endif
+      noautocmd silent! execute 'pedit!' fnameescape(filename)
     endif
 
-    let prev_winnr = winnr('#')
     let winnr = winnr()
     wincmd P
-    let bufnr = s:open(a:candidate)
-    call s:jump(a:candidate, 1)
-    execute prev_winnr.'wincmd w'
-    execute winnr.'wincmd w'
-
-    if !buflisted
-      call unite#add_previewed_buffer_list(bufnr)
-    endif
+    try
+      let bufnr = s:open(a:candidate)
+      if bufwinnr < 0
+        doautocmd BufRead
+        setlocal nomodified
+        if !buflisted
+          call unite#add_previewed_buffer_list(bufnr)
+        endif
+      endif
+      call s:jump(a:candidate, 1)
+    finally
+      execute winnr.'wincmd w'
+    endtry
   endfunction"}}}
 
   let kind.action_table.highlight = {
@@ -111,9 +112,9 @@ function! unite#kinds#jump_list#define() "{{{
       let context = unite.context
       let current_winnr = winnr()
 
-      if context.vertical 
+      if context.vertical
           setlocal winfixwidth
-      else 
+      else
           setlocal winfixheight
       endif
 
@@ -170,6 +171,10 @@ function! s:jump(candidate, is_highlight) "{{{
   let line = get(a:candidate, 'action__line', 1)
   let pattern = get(a:candidate, 'action__pattern', '')
 
+  if line == ''
+    " Use default line number.
+    let line = 1
+  endif
   if line !~ '^\d\+$'
     call unite#print_error('unite: jump_list: Invalid action__line format.')
     return
@@ -178,13 +183,19 @@ function! s:jump(candidate, is_highlight) "{{{
   if !has_key(a:candidate, 'action__pattern')
     " Jump to the line number.
     let col = get(a:candidate, 'action__col', 0)
-    if col == 0
-      if line('.') != line
-        execute line
+    if col == 0 && has_key(a:candidate, 'action__col_pattern')
+      " Search col pattern.
+      let pattern = a:candidate.action__col_pattern
+      if pattern == ''
+        " Use context.input
+        let pattern = unite#get_context().input
       endif
-    else
-      call cursor(line, col)
+
+      let col = 0
+      silent! let col = match(getline(line), pattern) + 1
     endif
+
+    call cursor(line, col)
 
     call s:open_current_line(a:is_highlight)
     return
@@ -200,24 +211,24 @@ function! s:jump(candidate, is_highlight) "{{{
         execute line
       endif
     else
-      call search(pattern, 'w')
+      silent! call search(pattern, 'w')
     endif
 
     call s:open_current_line(a:is_highlight)
     return
   endif
 
-  call search(pattern, 'w')
+  silent! call search(pattern, 'w')
 
   let lnum_prev = line('.')
-  call search(pattern, 'w')
+  silent! call search(pattern, 'w')
   let lnum = line('.')
   if lnum != lnum_prev
     " Detected same pattern lines!!
     let start_lnum = lnum
     while source.calc_signature(lnum) !=#
           \ a:candidate.action__signature
-      call search(pattern, 'w')
+      silent! call search(pattern, 'w')
       let lnum = line('.')
       if lnum == start_lnum
         " Not found.
@@ -260,7 +271,8 @@ function! s:open_current_line(is_highlight) "{{{
   normal! zv
   normal! zz
   if a:is_highlight
-    execute 'match Search /\%'.line('.').'l/'
+    call s:clear_highlight()
+    call unite#view#_match_line('Search', line('.'), 10)
   endif
 endfunction"}}}
 
@@ -268,9 +280,12 @@ function! s:open(candidate) "{{{
   let bufnr = s:get_bufnr(a:candidate)
   if bufnr != bufnr('%')
     if has_key(a:candidate, 'action__buffer_nr')
-      silent execute 'buffer' bufnr
+      silent execute 'keepjumps buffer' bufnr
     else
-      edit! `=a:candidate.action__path`
+      call unite#util#smart_execute_command(
+            \ 'keepjumps edit!', unite#util#substitute_path_separator(
+            \   fnamemodify(a:candidate.action__path, ':~:.')))
+      let bufnr = bufnr('%')
     endif
   endif
 
@@ -284,8 +299,13 @@ endfunction"}}}
 function! s:get_bufnr(candidate) "{{{
   return has_key(a:candidate, 'action__buffer_nr') ?
         \ a:candidate.action__buffer_nr :
-        \ bufnr(unite#util#escape_file_searching(
-        \     a:candidate.action__path))
+        \ bufnr(a:candidate.action__path)
+endfunction"}}}
+function! s:convert_path(path) "{{{
+  return unite#util#substitute_path_separator(fnamemodify(a:path, ':p'))
+endfunction"}}}
+function! s:clear_highlight() "{{{
+  silent! call matchdelete(10)
 endfunction"}}}
 
 let &cpo = s:save_cpo

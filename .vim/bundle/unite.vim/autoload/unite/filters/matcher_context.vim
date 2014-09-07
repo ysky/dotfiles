@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: matcher_context.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 29 May 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -55,6 +54,11 @@ function! s:matcher.filter(candidates, context) "{{{
   endfor
 
   return candidates
+endfunction"}}}
+function! s:matcher.pattern(input) "{{{
+  return (a:input =~# '\^.*') ?
+        \ unite#filters#matcher_regexp#define().pattern(a:input) :
+        \ unite#filters#matcher_glob#define().pattern(a:input)
 endfunction"}}}
 
 let &cpo = s:save_cpo

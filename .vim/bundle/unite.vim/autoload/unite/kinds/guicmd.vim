@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: guicmd.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 18 Aug 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -54,7 +53,7 @@ function! s:kind.action_table.execute.func(candidate) "{{{
 
   let cmdline = unite#util#is_windows() ?
         \ join(map(args, '"\"".v:val."\""')) :
-        \ args[0] . ' ' . join(map(args[1:], "''''.v:val.''''"))
+        \ args[0] . ' ' . join(map(args[1:], "shellescape(v:val)"))
 
   if unite#util#is_windows()
     let cmdline = unite#util#iconv(cmdline, &encoding, 'char')

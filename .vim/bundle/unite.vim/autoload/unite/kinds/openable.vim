@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: openable.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 19 Jul 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -29,8 +28,6 @@ set cpo&vim
 
 " Variables  "{{{
 call unite#util#set_default('g:unite_kind_openable_persist_open_blink_time', '250m')
-call unite#util#set_default('g:unite_kind_openable_cd_command', 'cd')
-call unite#util#set_default('g:unite_kind_openable_lcd_command', 'lcd')
 "}}}
 function! unite#kinds#openable#define() "{{{
   return s:kind
@@ -39,6 +36,7 @@ endfunction"}}}
 let s:kind = {
       \ 'name' : 'openable',
       \ 'action_table': {},
+      \ 'parents' : [],
       \}
 
 " Actions "{{{
@@ -49,27 +47,31 @@ let s:kind.action_table.tabopen = {
       \ }
 function! s:kind.action_table.tabopen.func(candidates) "{{{
   for candidate in a:candidates
-    tabnew
-    call unite#take_action('open', candidate)
+    let hidden_save = &hidden
+    try
+      set nohidden
+      tabnew
+      call unite#take_action('open', candidate)
+    finally
+      let &hidden = hidden_save
+    endtry
   endfor
 endfunction"}}}
 
-let s:kind.action_table.tabdrop = {
-      \ 'description' : 'open files by ":tab drop" command',
+let s:kind.action_table.choose = {
+      \ 'description' : 'choose windows and open items',
       \ 'is_selectable' : 1,
       \ }
-function! s:kind.action_table.tabdrop.func(candidates) "{{{
-  let bufpath = unite#util#substitute_path_separator(expand('%:p'))
-
+function! s:kind.action_table.choose.func(candidates) "{{{
   for candidate in a:candidates
-    if bufpath !=# candidate.action__path
-      call unite#util#smart_execute_command('tab drop',
-            \ candidate.action__path)
-
-      call unite#remove_previewed_buffer_list(
-            \ bufnr(unite#util#escape_file_searching(
-            \       candidate.action__path)))
+    if winnr('$') != 1
+      let winnr = unite#helper#choose_window()
+      if winnr > 0 && winnr != winnr()
+        execute winnr.'wincmd w'
+      endif
     endif
+
+    call unite#take_action('open', candidate)
   endfor
 endfunction"}}}
 
@@ -178,7 +180,110 @@ function! s:kind.action_table.persist_open.func(candidate) "{{{
   endif
 endfunction"}}}
 
+let s:kind.action_table.tabsplit = {
+      \ 'description' : 'tabopen and split items',
+      \ 'is_selectable' : 1,
+      \ 'is_tab' : 1,
+      \ }
+function! s:kind.action_table.tabsplit.func(candidates) "{{{
+  let hidden_save = &hidden
+  try
+    set nohidden
+    tabnew
+    silent call unite#take_action('open', a:candidates[0])
+  finally
+    let &hidden = hidden_save
+  endtry
+
+  for candidate in a:candidates[1:]
+    silent call unite#take_action('vsplit', candidate)
+  endfor
+
+  " Resize all windows
+  wincmd =
+endfunction"}}}
+
+let s:kind.action_table.switch = {
+      \ 'description' : 'open in current window'
+      \   . ' or jump to existing window/tabpage',
+      \ 'is_selectable' : 1,
+      \ }
+function! s:kind.action_table.switch.func(candidates) "{{{
+  for candidate in s:filter_bufpath(a:candidates)
+    if s:switch(candidate)
+      call unite#take_action('open', candidate)
+    endif
+  endfor
+endfunction"}}}
+
+let s:kind.action_table.tabswitch = {
+      \ 'description' : 'open in new tab'
+      \   . ' or jump to existing window/tabpage',
+      \ 'is_selectable' : 1,
+      \ }
+function! s:kind.action_table.tabswitch.func(candidates) "{{{
+  for candidate in s:filter_bufpath(a:candidates)
+    if s:switch(candidate)
+      call unite#take_action('tabopen', candidate)
+    endif
+  endfor
+endfunction"}}}
+
+let s:kind.action_table.splitswitch = {
+      \ 'description' : 'horizontal split open items'
+      \   . ' or jump to existing window/tabpage',
+      \ 'is_selectable' : 1,
+      \ }
+function! s:kind.action_table.splitswitch.func(candidates) "{{{
+  for candidate in s:filter_bufpath(a:candidates)
+    if s:switch(candidate)
+      call unite#take_action('split', candidate)
+    endif
+  endfor
+endfunction"}}}
+
+let s:kind.action_table.vsplitswitch = {
+      \ 'description' : 'vertical split open items'
+      \   . ' or jump to existing window/tabpage',
+      \ 'is_selectable' : 1,
+      \ }
+function! s:kind.action_table.vsplitswitch.func(candidates) "{{{
+  for candidate in s:filter_bufpath(a:candidates)
+    if s:switch(candidate)
+      call unite#take_action('vsplit', candidate)
+    endif
+  endfor
+endfunction"}}}
+
 "}}}
+
+function! s:filter_bufpath(candidates) "{{{
+  let bufpath = unite#util#substitute_path_separator(expand('%:p'))
+  return filter(copy(a:candidates), 'v:val.action__path !=# bufpath')
+endfunction"}}}
+
+function! s:search_buffer(candidate) "{{{
+  let bufnr = bufnr(a:candidate.action__path)
+  for tabnr in range(1, tabpagenr('$'))
+    if index(tabpagebuflist(tabnr), bufnr) >= 0
+      return tabnr
+    endif
+  endfor
+
+  return -1
+endfunction"}}}
+
+function! s:switch(candidate) "{{{
+  let tabnr = s:search_buffer(a:candidate)
+  if tabnr < 0
+    " Not found
+    return 1
+  endif
+
+  execute 'tabnext' tabnr
+  execute bufwinnr(a:candidate.action__path) . 'wincmd w'
+  call unite#take_action('open', a:candidate)
+endfunction"}}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

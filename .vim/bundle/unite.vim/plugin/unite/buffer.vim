@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: buffer.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 06 Aug 2010
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -53,8 +52,7 @@ function! s:append(path) "{{{
 
   " Append the current buffer.
   let bufnr = bufnr('%')
-
-  if exists('*gettabvar')
+  if exists('*gettabvar') && bufnr == bufnr('%')
     " Delete same buffer in other tab pages.
     for tabnr in range(1, tabpagenr('$'))
       let buffer_dict = gettabvar(tabnr, 'unite_buffer_dictionary')
@@ -65,11 +63,11 @@ function! s:append(path) "{{{
     endfor
   endif
 
-  let t:unite_buffer_dictionary[bufnr] = 1
-
-  if !has('vim_starting') || bufname('%') != ''
-    call unite#sources#buffer#variables#append()
+  if !has('vim_starting') || bufname(bufnr) != ''
+    call unite#sources#buffer#variables#append(bufnr)
   endif
+
+  let t:unite_buffer_dictionary[bufnr] = 1
 endfunction"}}}
 
 let &cpo = s:save_cpo

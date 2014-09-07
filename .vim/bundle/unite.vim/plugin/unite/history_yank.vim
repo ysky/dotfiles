@@ -1,7 +1,6 @@
 "=============================================================================
 " FILE: history_yank.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 05 Oct 2010
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -38,9 +37,14 @@ if exists('g:unite_source_history_yank_enable')
       \ && g:unite_source_history_yank_enable
   augroup plugin-unite-history-yank
     autocmd!
-    autocmd CursorMoved * silent
+    autocmd CursorMoved,FocusGained * silent
      \ call unite#sources#history_yank#_append()
   augroup END
+
+  if v:version > 703 || v:version == 703 && has('patch867')
+    autocmd plugin-unite-history-yank TextChanged * silent
+     \ call unite#sources#history_yank#_append()
+  endif
 endif
 
 let g:loaded_unite_source_history_yank = 1

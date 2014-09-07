@@ -1,3 +1,45 @@
 [submodule ".vim/vundle"]
 	path = .vim/vundle
-	url = https://github.com/gmarik/vundle.git
+  url  = https://github.com/gmarik/vundle.git
+[submodule ".vim/Align"]
+  path = .vim/bundle/Align
+  url  = https://github.com/vim-scripts/Align.git
+[submodule ".vim/QuickBuf"]
+  path = .vim/bundle/QuickBuf
+  url  = https://github.com/vim-scripts/QuickBuf.git
+[submodule ".vim/lightline"]
+  path = .vim/bundle/lightline.vim
+  url  = https://github.com/itchyny/lightline.vim.git
+[submodule ".vim/ruby-matchit"]
+  path = .vim/bundle/ruby-matchit
+  url  = https://github.com/vim-scripts/ruby-matchit.git
+[submodule ".vim/supertab"]
+  path = .vim/bundle/supertab
+  url  = https://github.com/ervandew/supertab.git
+[submodule ".vim/unite-outline"]
+  path = .vim/bundle/unite-outline
+  url  = https://github.com/Shougo/unite-outline.git
+[submodule ".vim/vim-endwise"]
+  path = .vim/bundle/vim-endwise
+  url  = https://github.com/tpope/vim-endwise.git
+[submodule ".vim/vim-markdown"]
+  path = .vim/bundle/vim-markdown
+  url  = https://github.com/plasticboy/vim-markdown.git
+[submodule ".vim/vim-rails"]
+  path = .vim/bundle/vim-rails
+  url  = https://github.com/tpope/vim-rails.git
+[submodule ".vim/vim-slim"]
+  path = .vim/bundle/vim-slim
+  url  = https://github.com/slim-template/vim-slim.git
+[submodule ".vim/vim-surround"]
+  path = .vim/bundle/vim-surround
+  url  = https://github.com/tpope/vim-surround.git
+[submodule ".vim/vim-coffee-script"]
+  path = .vim/bundle/vim-coffee-script
+  url  = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".vim/vim-puppet"]
+  path = .vim/bundle/vim-puppet
+  url  = https://github.com/rodjek/vim-puppet.git
+[submodule ".vim/vundle"]
+	path = .vim/bundle/vundle
+  url  = https://github.com/gmarik/vundle.git

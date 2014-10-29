@@ -19,10 +19,7 @@ function within-bundled-project() {
 
 function run-with-bundler()
 {
-  # for rails 4.1~
-  if [ -e ./bin/$1 ]; then
-    ./bin/$1
-  elif bundler-installed && within-bundled-project; then
+  if bundler-installed && within-bundled-project; then
     bundle exec $@
   else
     $@

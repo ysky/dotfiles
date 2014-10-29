@@ -17,9 +17,22 @@ bind k prev
 bind j next
 bind l windowlist -b
 bind v split -v
-bind L layout show 
-bind K layout prev
-bind J layout next
+
+# for layout
+#bind L layout show 
+#bind K layout prev
+#bind J layout next
+bind ^Y eval 'command -c layout' 'layout show'
+
+# create/remove layout
+bind -c layout c eval 'layout new'    'layout show'
+bind -c layout X eval 'layout remove' 'layout show'
+
+# change the current layout title or number
+bind -c layout A colon 'layout title '
+bind -c layout N colon 'layout number '
+
+# continuous switch to other layout
 
 #windowlist string '%3n %f%t%=%h%='
 windowlist title '%{u .g}Num Flags Title %='
@@ -142,3 +155,4 @@ screen -t root
 
 # include hostlocal .screenrc
 source '~/.screenrc.local'
+

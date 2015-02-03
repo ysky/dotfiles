@@ -32,6 +32,10 @@ bind -c layout X eval 'layout remove' 'layout show'
 bind -c layout A colon 'layout title '
 bind -c layout N colon 'layout number '
 
+# switch layout
+bind -c layout ^N eval 'layout next' 'command -c layout' 'layout show'
+bind -c layout ^P eval 'layout prev' 'command -c layout' 'layout show'
+
 # continuous switch to other layout
 
 #windowlist string '%3n %f%t%=%h%='
@@ -154,5 +158,5 @@ screen -t home
 screen -t root
 
 # include hostlocal .screenrc
-source '~/.screenrc.local'
+#source '~/.screenrc.local'
 

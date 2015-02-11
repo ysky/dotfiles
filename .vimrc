@@ -91,6 +91,13 @@ nnoremap # :<C-u>set hlsearch<Return>#
 nnoremap <C-l> <C-W>>
 nnoremap <C-h> <C-W><
 
+" window移動のショートカット
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sw <C-w>w
+
 inoremap <C-a> <Esc>^i
 inoremap <C-e> <Esc>$a
 

@@ -52,7 +52,7 @@ setopt PUSHD_IGNORE_DUPS
 autoload -Uz compinit && compinit
 
 setopt prompt_subst
-PROMPT="[%n@%m]%% "
+PROMPT="%(?.%{%}.%{${fg[red]}%})[%n@%m]%{${reset_color}%}%# "
 RPROMPT="[%T %~]"
 REPORTTIME=3
 

@@ -2,7 +2,7 @@ set nocompatible
 filetype off
 
 " vundler
-set rtp+=~/.vim/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins

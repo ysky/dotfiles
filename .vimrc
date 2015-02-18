@@ -9,7 +9,6 @@ call vundle#rc()
 " pluginをインストールする際は :PluginInstall
 Bundle 'gmarik/vundle'
 Bundle "Align"
-Bundle "QuickBuf"
 Bundle "tpope/vim-rails"
 Bundle "tpope/vim-surround"
 Bundle "tpope/vim-endwise"

@@ -4,9 +4,6 @@
 [submodule ".vim/Align"]
   path = .vim/bundle/Align
   url  = https://github.com/vim-scripts/Align.git
-[submodule ".vim/QuickBuf"]
-  path = .vim/bundle/QuickBuf
-  url  = https://github.com/vim-scripts/QuickBuf.git
 [submodule ".vim/lightline"]
   path = .vim/bundle/lightline.vim
   url  = https://github.com/itchyny/lightline.vim.git

@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/neobundle.vim"]
 	path = .vim/bundle/neobundle.vim
 	url = https://github.com/Shougo/neobundle.vim
+[submodule ".vim/bundle/auto-ctags.vim"]
+	path = .vim/bundle/auto-ctags.vim
+	url = https://github.com/soramugi/auto-ctags.vim.git

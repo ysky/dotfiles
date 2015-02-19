@@ -1,4 +1,5 @@
 Align
+auto-ctags.vim
 lightline.vim
 neobundle.vim
 ruby-matchit

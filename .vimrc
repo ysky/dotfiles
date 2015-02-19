@@ -1,26 +1,28 @@
-set nocompatible
-filetype off
-
-" vundler
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" neobundle
+set runtimepath+=~/.vim/bundle/neobundle.vim
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " plugins
-" pluginをインストールする際は :PluginInstall
-Bundle 'gmarik/vundle'
-Bundle "Align"
-Bundle "tpope/vim-rails"
-Bundle "tpope/vim-surround"
-Bundle "tpope/vim-endwise"
-Bundle "Shougo/unite.vim"
-Bundle "Shougo/unite-outline"
-Bundle "ervandew/supertab"
-Bundle "ruby-matchit"
-Bundle "slim-template/vim-slim"
-Bundle "plasticboy/vim-markdown"
-Bundle "itchyny/lightline.vim"
-Bundle "rodjek/vim-puppet"
-Bundle "kchmck/vim-coffee-script"
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Align'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'ruby-matchit'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'rodjek/vim-puppet'
+NeoBundle 'kchmck/vim-coffee-script'
+
+call neobundle#end()
+
+filetype plugin indent on
+
+NeoBundleCheck
 
 set t_Co=256
 
@@ -40,9 +42,9 @@ set nobackup                   " バックアップファイルを作らない
 set nocompatible " 互換もモードを禁止
 set incsearch
 syntax on " syntax ハイライトをon
-filetype on
-" filetype indent plugin on
-filetype indent on
+" filetype on
+" " filetype indent plugin on
+" filetype indent on
 
 "setlocal cursorline
 "autocmd WinEnter * setlocal cursorline

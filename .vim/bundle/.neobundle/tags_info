@@ -1,0 +1,14 @@
+Align
+lightline.vim
+neobundle.vim
+ruby-matchit
+supertab
+unite-outline
+unite.vim
+vim-coffee-script
+vim-endwise
+vim-markdown
+vim-puppet
+vim-rails
+vim-slim
+vim-surround

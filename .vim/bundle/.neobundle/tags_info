@@ -3,6 +3,7 @@ auto-ctags.vim
 lightline.vim
 neobundle.vim
 neomru.vim
+nerdtree
 ruby-matchit
 supertab
 unite-outline

@@ -46,3 +46,6 @@
 [submodule ".vim/bundle/neomru.vim"]
 	path = .vim/bundle/neomru.vim
 	url = https://github.com/Shougo/neomru.vim.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git

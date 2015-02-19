@@ -9,6 +9,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " plugins
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Align'
 NeoBundle 'tpope/vim-rails'

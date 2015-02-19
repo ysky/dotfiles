@@ -2,6 +2,7 @@ Align
 auto-ctags.vim
 lightline.vim
 neobundle.vim
+neomru.vim
 ruby-matchit
 supertab
 unite-outline

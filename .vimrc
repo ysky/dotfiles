@@ -177,14 +177,6 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
-" srcexpl.vim
-let g:SrcExpl_winHeight = 8
-let g:SrcExpl_UpdateTags = 1
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
-
-" tags
-set tags+=.tags;
-
 " vim -b
 augroup BinaryXXD
   autocmd!
@@ -202,6 +194,14 @@ set list
 highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
 highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
 au BufRead,BufNew * match JpSpace /　/
+
+" auto-ctags
+set tags+=$HOME/.tags
+set tags+=.git/tags
+set tags+=.svn/tags
+let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git', '.svn']
+let g:auto_ctags_tags_name = 'tags'
 
 " lightline
 let g:lightline = {

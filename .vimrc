@@ -1,4 +1,8 @@
-" neobundle
+" vim: foldmethod=marker
+" vim: foldcolumn=3
+" vim: foldlevel=0
+
+" settings for neobundle "{{{
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -20,16 +24,14 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'soramugi/auto-ctags.vim'
 
 call neobundle#end()
-
 filetype plugin indent on
-
 NeoBundleCheck
-
-set t_Co=256
-
+" }}}
+" settings for base {{{
 " ----------------------------------------------
 "  基本設定
 " ----------------------------------------------
+set t_Co=256
 set autoread                   " 他で変更があったら自動で読み込み
 set ai                         " auto indent
 set shiftwidth=2               " インデント幅は2
@@ -40,17 +42,23 @@ set backspace=indent,eol,start " バックスペースですべて消せるよ�
 set formatoptions=lmoq         " テキスト整形オプション，マルチバイト系を追加
 set vb t_vb=                   " ビープを鳴らさない
 set nobackup                   " バックアップファイルを作らない
-set nocompatible " 互換もモードを禁止
+set nocompatible               " 互換もモードを禁止
 set incsearch
-syntax on " syntax ハイライトをon
-" filetype on
-" " filetype indent plugin on
-" filetype indent on
+set clipboard+=unnamed         " OSのクリップボードを使用する
+syntax on                      " syntax ハイライトをon
 
-"setlocal cursorline
-"autocmd WinEnter * setlocal cursorline
-"autocmd WinLeave * setlocal nocursorline
+" 分割時は右か下に出す．
+set splitright
+set splitbelow
 
+" 不可視文字の可視化
+set lcs=tab:>-,trail:_,extends:\
+set list
+highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
+highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
+au BufRead,BufNew * match JpSpace /　/
+" }}}
+" settings for status line {{{
 set laststatus=2
 "set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ENC=%{&fileencoding}]\ [POS=%l,%v][LEN=%L]\ [%p%%]
 let &statusline = ''
@@ -60,27 +68,18 @@ let &statusline .= '%{&bomb ? "[BOM]" : ""}'
 let &statusline .= ' [POS=%l,%v][LEN=%L][%p%%]'
 
 hi StatusLine term=NONE cterm=NONE ctermfg=white ctermbg=blue
-
-" OSのクリップボードを使用する
-set clipboard+=unnamed
-
-" for mac os x
+" }}}
+" settings for mac os x {{{
 " iTerm2でモードによってカーソルを変更
 if has("mac")
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   set ambiwidth=double
 endif
-
-" ノーマルモードに戻った時にすぐにカーソルが変化するように
-"inoremap <Esc> <Esc>gg`]
-
+" }}}
+" settings for keymap {{{
 " 挿入モードでCtrl+kでクリップボードの内容を貼り付けられるように
 imap <C-K> <ESC>"*pa
-
-" Ev/Rvでvimrcを編集/再読込できるように
-command! Ev edit $MYVIMRC
-command! Rv source $MYVIMRC
 
 nnoremap j gj
 nnoremap k gk
@@ -107,8 +106,8 @@ inoremap <C-e> <Esc>$a
 " leader(\)をスペースに変換しておく
 let mapleader = " "
 let g:mapleader = " "
-
-" colorscheme
+" }}}
+" settings for colorscheme {{{
 colorscheme hybrid
 highlight Normal ctermbg=none
 highlight Pmenu ctermbg=4
@@ -116,37 +115,15 @@ highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
 highlight Visual ctermbg=240
 highlight Search ctermbg=100
-
-" 分割時は右か下に出す．
-set splitright
-set splitbelow
-
-"vba形式のプラグインをインストールするときは
-":let g:vimball_home = "~/.vim/bundle/Align"
-":source %
-"でインストールパスを変更して対応
-
-" surround.vimのrailsカスタム
+" }}}
+" settings for surround.vim {{{
 " let g:surround_37 = "<% \r %>"  " %で<% %>くくり
 " let g:surround_61 = "<%= \r %>" " =で<%= %>くくり
 let g:surround_{char2nr("%")} = "<% \r %>"
 let g:surround_{char2nr("=")} = "<%= \r %>"
 let g:surround_{char2nr("!")} = "<!-- \r -->"
-
-"for rspec files
-" autocmd BufRead *_spec.rb syn keyword rubyRspec describe context shared_examples_for shared_context let
-" highlight def link rubyRspec Function
-
-" qfixapp.vim
-set runtimepath+=~/.vim/bundle/qfixapp.vim
-" キーマップリーダー
-let QFixHowm_Key = 'g'
-" howm_dirはファイルを保存したいディレクトリを設定
-let howm_dir             = '~/.howm'
-let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.txt'
-let howm_fileencoding    = 'utf-8'
-let howm_fileformat      = 'unix'
-
+" }}}
+" settings for unite.vim {{{
 " unite.vim
 "let g:unite_enable_split_vertically=1
 "noremap <C-u> :Unite -buffer-name=files file buffer file_mru<CR>
@@ -176,8 +153,8 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 " ESCキーを2回押すと終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
-
-" vim -b
+" }}}
+" settings for binary (vim -b) {{{
 augroup BinaryXXD
   autocmd!
   autocmd BufReadPre  *.bin let &binary =1
@@ -187,23 +164,16 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
-
-" 不可視文字の可視化
-set lcs=tab:>-,trail:_,extends:\
-set list
-highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
-highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
-au BufRead,BufNew * match JpSpace /　/
-
-" auto-ctags
+" }}}
+" settings for auto-ctags {{{
 set tags+=$HOME/.tags
 set tags+=.git/tags
 set tags+=.svn/tags
 let g:auto_ctags = 1
 let g:auto_ctags_directory_list = ['.git', '.svn']
 let g:auto_ctags_tags_name = 'tags'
-
-" lightline
+" }}}
+" settings for lightline {{{
 let g:lightline = {
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
@@ -263,3 +233,4 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+" }}}

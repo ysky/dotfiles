@@ -27,6 +27,7 @@ NeoBundle 'soramugi/auto-ctags.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 call neobundle#end()
 filetype plugin indent on

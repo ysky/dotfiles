@@ -8,6 +8,7 @@ nerdtree
 ruby-matchit
 supertab
 switch.vim
+tcomment_vim
 unite-outline
 unite.vim
 vim-coffee-script

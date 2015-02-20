@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/switch.vim"]
 	path = .vim/bundle/switch.vim
 	url = https://github.com/AndrewRadev/switch.vim.git
+[submodule ".vim/bundle/tcomment_vim"]
+	path = .vim/bundle/tcomment_vim
+	url = https://github.com/tomtom/tcomment_vim.git

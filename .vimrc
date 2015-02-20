@@ -25,6 +25,7 @@ NeoBundle 'rodjek/vim-puppet'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'soramugi/auto-ctags.vim'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'AndrewRadev/switch.vim'
 
 call neobundle#end()
 filetype plugin indent on

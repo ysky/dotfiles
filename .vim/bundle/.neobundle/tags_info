@@ -7,6 +7,7 @@ neomru.vim
 nerdtree
 ruby-matchit
 supertab
+switch.vim
 unite-outline
 unite.vim
 vim-coffee-script

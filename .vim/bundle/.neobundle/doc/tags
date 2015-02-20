@@ -80,6 +80,7 @@
 :NeoMRUImportFile	neomru.txt	/*:NeoMRUImportFile*
 :NeoMRUReload	neomru.txt	/*:NeoMRUReload*
 :NeoMRUSave	neomru.txt	/*:NeoMRUSave*
+:Switch	switch.txt	/*:Switch*
 :Unite	unite.txt	/*:Unite*
 :UniteBookmarkAdd	unite.txt	/*:UniteBookmarkAdd*
 :UniteClose	unite.txt	/*:UniteClose*
@@ -284,6 +285,7 @@ alignmap-t~	Align.txt	/*alignmap-t~*
 alignmaps	Align.txt	/*alignmaps*
 alignusage	Align.txt	/*alignusage*
 b:neocomplcache_sources_list	neocomplcache.txt	/*b:neocomplcache_sources_list*
+b:switch_definitions	switch.txt	/*b:switch_definitions*
 buffer_complete	neocomplcache.txt	/*buffer_complete*
 config/rails.vim	rails.txt	/*config\/rails.vim*
 cs	surround.txt	/*cs*
@@ -430,6 +432,10 @@ g:rails_abbreviations	rails.txt	/*g:rails_abbreviations*
 g:rails_ctags_arguments	rails.txt	/*g:rails_ctags_arguments*
 g:rails_gem_projections	rails.txt	/*g:rails_gem_projections*
 g:rails_projections	rails.txt	/*g:rails_projections*
+g:switch_builtins	switch.txt	/*g:switch_builtins*
+g:switch_definitions	switch.txt	/*g:switch_definitions*
+g:switch_mapping	switch.txt	/*g:switch_mapping*
+g:switch_no_builtins	switch.txt	/*g:switch_no_builtins*
 g:unite_abbr_highlight	unite.txt	/*g:unite_abbr_highlight*
 g:unite_converter_file_directory_width	unite.txt	/*g:unite_converter_file_directory_width*
 g:unite_cursor_line_highlight	unite.txt	/*g:unite_cursor_line_highlight*
@@ -910,6 +916,16 @@ surround-mappings	surround.txt	/*surround-mappings*
 surround-replacements	surround.txt	/*surround-replacements*
 surround-targets	surround.txt	/*surround-targets*
 surround.txt	surround.txt	/*surround.txt*
+switch	switch.txt	/*switch*
+switch-builtins	switch.txt	/*switch-builtins*
+switch-contents	switch.txt	/*switch-contents*
+switch-customization	switch.txt	/*switch-customization*
+switch-installation	switch.txt	/*switch-installation*
+switch-issues	switch.txt	/*switch-issues*
+switch-settings	switch.txt	/*switch-settings*
+switch-similar-plugins	switch.txt	/*switch-similar-plugins*
+switch-usage	switch.txt	/*switch-usage*
+switch.txt	switch.txt	/*switch.txt*
 syntax_complete	neocomplcache.txt	/*syntax_complete*
 tags_complete	neocomplcache.txt	/*tags_complete*
 unite	unite.txt	/*unite*

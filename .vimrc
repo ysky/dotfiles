@@ -346,3 +346,9 @@ let g:switch_custom_definitions =
 \   { 'expect(\([^. ]\+\))\.to\(_not\|\)': '\1.should\2' }
 \ ]
 " }}}
+" settings for vim-indent-guides {{{
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+" }}}

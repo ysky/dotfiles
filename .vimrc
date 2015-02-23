@@ -51,6 +51,7 @@ set nobackup                   " バックアップファイルを作らない
 set nocompatible               " 互換もモードを禁止
 set incsearch
 set clipboard+=unnamed         " OSのクリップボードを使用する
+set pastetoggle=<F10>          " pastemodeのtoggleをF10にわりあて
 syntax on                      " syntax ハイライトをon
 
 " 分割時は右か下に出す．

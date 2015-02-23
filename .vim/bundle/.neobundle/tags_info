@@ -12,7 +12,6 @@ tcomment_vim
 unite-outline
 unite.vim
 vim-coffee-script
-vim-endwise
 vim-indent-guides
 vim-markdown
 vim-puppet

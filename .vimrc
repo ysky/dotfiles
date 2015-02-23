@@ -27,6 +27,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle "kana/vim-smartinput"
+NeoBundle "cohama/vim-smartinput-endwise"
 
 call neobundle#end()
 filetype plugin indent on
@@ -351,4 +353,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+" }}}
+" settings for vim-smartinput {{{
+call smartinput_endwise#define_default_rules()
 " }}}

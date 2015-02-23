@@ -17,4 +17,6 @@ vim-markdown
 vim-puppet
 vim-rails
 vim-slim
+vim-smartinput
+vim-smartinput-endwise
 vim-surround

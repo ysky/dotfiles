@@ -11,7 +11,6 @@ NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Align'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
@@ -241,34 +240,6 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
-" }}}
-" settings for neocomplcache {{{
-" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Enable heavy features.
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \ }
-
-" AutoComplPop like behavior.
-let g:neocomplcache_enable_auto_select = 1
 " }}}
 " settings for switch.vim {{{
 let g:switch_custom_definitions =

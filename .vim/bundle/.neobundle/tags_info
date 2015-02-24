@@ -2,7 +2,6 @@ Align
 auto-ctags.vim
 lightline.vim
 neobundle.vim
-neocomplcache
 neomru.vim
 nerdtree
 ruby-matchit

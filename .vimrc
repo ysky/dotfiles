@@ -332,7 +332,7 @@ call smartinput#define_rule({
   \   'at'       : '\%#',
   \   'char'     : '#',
   \   'input'    : '#{}<Left>',
-  \   'filetype' : ['ruby'],
+  \   'filetype' : ['ruby','slim'],
   \   'syntax'   : ['Constant', 'Special'],
   \   })
 
@@ -341,6 +341,6 @@ call smartinput#define_rule({
   \   'at' : '\({\|\<do\>\)\s*\%#',
   \   'char' : '<Bar>',
   \   'input' : '<Bar><Bar><Left>',
-  \   'filetype' : ['ruby'],
+  \   'filetype' : ['ruby', 'slim'],
   \    })
 " }}}

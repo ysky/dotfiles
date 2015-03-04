@@ -15,6 +15,7 @@ vim-indent-guides
 vim-markdown
 vim-puppet
 vim-rails
+vim-scala
 vim-slim
 vim-smartinput
 vim-smartinput-endwise

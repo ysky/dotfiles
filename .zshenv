@@ -14,6 +14,12 @@ if [ $? = 0 ]; then
   eval "$(rbenv init -)"
 fi
 
+# direnv
+which direnv > /dev/null 2>&1
+if [ $? = 0 ]; then
+  eval "$(direnv hook zsh)"
+fi
+
 # 各サーバの個別設定
 if [ -e ~/.zshenv_local ]; then
   source ~/.zshenv_local

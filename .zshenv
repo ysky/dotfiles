@@ -1,11 +1,6 @@
 # PASH
 export PATH=${HOME}/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 
-# bundler-exec
-if [ -e ~/.zsh/bundler-exec.sh ]; then
-  source ~/.zsh/bundler-exec.sh
-fi
-
 # rbenv
 export RBENV_ROOT=/var/lib/rbenv
 export PATH="${RBENV_ROOT}/bin:$PATH"

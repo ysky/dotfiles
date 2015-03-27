@@ -1,3 +1,7 @@
+# vim: foldmethod=marker
+# vim: foldcolumn=3
+# vim: foldlevel=0
+
 #
 # .zshrc is sourced in interactive shells.
 # It should contain commands to set up aliases,
@@ -15,7 +19,7 @@ setopt NOBGNICE
 ## restart running processes on exit
 #setopt HUP
 
-## history
+# history {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=500000
 SAVEHIST=500000
@@ -32,15 +36,10 @@ setopt hist_expire_dups_first
 setopt hist_reduce_blanks
 setopt extended_history
 setopt inc_append_history
+# }}}
 
 ## never ever beep ever
 setopt NO_BEEP
-
-## automatically decide when to page a list of completions
-#LISTMAX=0
-
-## disable mail checking
-#MAILCHECK=0
 
 autoload -U colors
 colors
@@ -51,6 +50,7 @@ setopt PUSHD_IGNORE_DUPS
 
 autoload -Uz compinit && compinit
 
+# prompt {{{
 setopt prompt_subst
 PROMPT="%(?.%{%}.%{${fg[red]}%})[%n@%m]%{${reset_color}%}%# "
 RPROMPT="[%T %~]"
@@ -58,13 +58,14 @@ REPORTTIME=3
 
 # コマンド実行後にプロンプトを消す
 setopt transient_rprompt
+# }}}
 
 # 履歴の前方一致検索
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end 
+bindkey "^N" history-beginning-search-forward-end
 
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
@@ -98,6 +99,10 @@ export LANG=ja_JP.utf-8
 export TERM=xterm
 export LESS='-c -i -X -R -F'
 
+# kill terminal lock
+stty stop undef
+
+# alias {{{
 alias ll='ls -l --color=tty'
 alias lla='ls -la --color=tty'
 if [ -e /usr/local/bin/vim ]; then
@@ -111,10 +116,8 @@ fi
 alias grep='grep --color=auto'
 alias rmrf='rm -rf'
 alias ctags='ctags -f .tags'
-
-# kill terminal lock
-stty stop undef
-
+# }}}
+# auto ls {{{
 # cd するたびにllをたたく.ただし50個以上項目がある場合は個数の表示にとどめる
 function chpwd() {
   if [ $(ls -l | wc -l) -le 50 ]; then
@@ -126,7 +129,8 @@ function chpwd() {
     echo "$(ls -l | wc -l) items exist in `pwd`"
   fi
 }
-
+# }}}
+# include {{{
 if [ -e ~/.zsh/git-completion.bash ]; then
   source ~/.zsh/git-completion.bash
 fi
@@ -134,3 +138,4 @@ fi
 if [ -e ~/.zshrc_local ]; then
   source ~/.zshrc_local
 fi
+# }}}

@@ -53,11 +53,21 @@ autoload -Uz compinit && compinit
 # prompt {{{
 setopt prompt_subst
 PROMPT="%(?.%{%}.%{${fg[red]}%})[%n@%m]%{${reset_color}%}%# "
-RPROMPT="[%T %~]"
+RPROMPT="[%~]"
 REPORTTIME=3
 
 # コマンド実行後にプロンプトを消す
 setopt transient_rprompt
+
+# vcs_info
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*'     formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*'     actionformats '[%b|%a]'
+precmd () { vcs_info }
+RPROMPT='${vcs_info_msg_0_}'${RPROMPT}
 # }}}
 
 # 履歴の前方一致検索

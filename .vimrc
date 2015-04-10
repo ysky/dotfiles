@@ -65,6 +65,10 @@ set list
 highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
 highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
 au BufRead,BufNew * match JpSpace /　/
+
+" vim7.4のsegv対策
+set regexpengine=1
+
 " }}}
 " settings for status line {{{
 set laststatus=2

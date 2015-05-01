@@ -70,6 +70,22 @@ au BufRead,BufNew * match JpSpace /　/
 set regexpengine=1
 
 " }}}
+" settings for folding {{{
+set foldenable
+autocmd FileType ruby :set foldmethod=indent
+autocmd FileType ruby :set foldlevel=1
+autocmd FileType ruby :set foldnestmax=2
+
+autocmd InsertEnter * if !exists("w:last_fdm")
+       \| let w:last_fdm=&foldmethod
+       \| setlocal foldmethod=manual
+       \| endif
+
+autocmd InsertLeave,WinLeave * if exists("w:last_fdm")
+       \| let &l:foldmethod=w:last_fdm
+       \| unlet w:last_fdm
+       \| endif
+" }}}
 " settings for status line {{{
 set laststatus=2
 "set statusline=%f%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ENC=%{&fileencoding}]\ [POS=%l,%v][LEN=%L]\ [%p%%]
@@ -348,4 +364,7 @@ call smartinput#define_rule({
   \   'input' : '<Bar><Bar><Left>',
   \   'filetype' : ['ruby', 'slim'],
   \    })
+" }}}
+" settings for vim-markdown {{{
+let g:vim_markdown_folding_disabled=1
 " }}}

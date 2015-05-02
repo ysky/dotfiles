@@ -85,6 +85,8 @@ autocmd InsertLeave,WinLeave * if exists("w:last_fdm")
        \| let &l:foldmethod=w:last_fdm
        \| unlet w:last_fdm
        \| endif
+
+autocmd FileType ruby normal zR
 " }}}
 " settings for status line {{{
 set laststatus=2

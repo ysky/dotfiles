@@ -67,7 +67,9 @@ highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
 au BufRead,BufNew * match JpSpace /　/
 
 " vim7.4のsegv対策
-set regexpengine=1
+if v:version > 704
+  set regexpengine=1
+endif
 
 " }}}
 " settings for folding {{{

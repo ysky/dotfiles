@@ -28,6 +28,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
+NeoBundle "derekwyatt/vim-scala"
 
 call neobundle#end()
 filetype plugin indent on
@@ -64,6 +65,26 @@ set list
 highlight SpecialKey cterm=NONE ctermfg=235 ctermbg=0
 highlight JpSpace cterm=underline ctermfg=1 ctermbg=0
 au BufRead,BufNew * match JpSpace /　/
+
+" vim7.4のsegv対策
+set regexpengine=1
+
+" }}}
+" settings for folding {{{
+set foldenable
+autocmd FileType ruby :set foldmethod=indent
+autocmd FileType ruby :set foldlevel=1
+autocmd FileType ruby :set foldnestmax=2
+
+autocmd InsertEnter * if !exists("w:last_fdm")
+       \| let w:last_fdm=&foldmethod
+       \| setlocal foldmethod=manual
+       \| endif
+
+autocmd InsertLeave,WinLeave * if exists("w:last_fdm")
+       \| let &l:foldmethod=w:last_fdm
+       \| unlet w:last_fdm
+       \| endif
 " }}}
 " settings for status line {{{
 set laststatus=2
@@ -343,4 +364,7 @@ call smartinput#define_rule({
   \   'input' : '<Bar><Bar><Left>',
   \   'filetype' : ['ruby', 'slim'],
   \    })
+" }}}
+" settings for vim-markdown {{{
+let g:vim_markdown_folding_disabled=1
 " }}}

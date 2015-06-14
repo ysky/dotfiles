@@ -22,6 +22,8 @@
 'NERDTreeStatusline'	NERD_tree.txt	/*'NERDTreeStatusline'*
 'NERDTreeWinPos'	NERD_tree.txt	/*'NERDTreeWinPos'*
 'NERDTreeWinSize'	NERD_tree.txt	/*'NERDTreeWinSize'*
+'g:scala_use_builtin_tagbar_defs'	scala.txt	/*'g:scala_use_builtin_tagbar_defs'*
+'g:scala_use_default_keymappings'	scala.txt	/*'g:scala_use_default_keymappings'*
 'indent_guides_auto_colors'	indent_guides.txt	/*'indent_guides_auto_colors'*
 'indent_guides_color_change_percent'	indent_guides.txt	/*'indent_guides_color_change_percent'*
 'indent_guides_default_mapping'	indent_guides.txt	/*'indent_guides_default_mapping'*
@@ -75,6 +77,7 @@
 :NeoMRUImportFile	neomru.txt	/*:NeoMRUImportFile*
 :NeoMRUReload	neomru.txt	/*:NeoMRUReload*
 :NeoMRUSave	neomru.txt	/*:NeoMRUSave*
+:SortScalaImports	scala.txt	/*:SortScalaImports*
 :Switch	switch.txt	/*:Switch*
 :TComment	tcomment.txt	/*:TComment*
 :TCommentAs	tcomment.txt	/*:TCommentAs*
@@ -822,6 +825,15 @@ rails-syntax-yaml	rails.txt	/*rails-syntax-yaml*
 rails-type-navigation	rails.txt	/*rails-type-navigation*
 rails-vim-integration	rails.txt	/*rails-vim-integration*
 rails.txt	rails.txt	/*rails.txt*
+scala	scala.txt	/*scala*
+scala-commands	scala.txt	/*scala-commands*
+scala-credits	scala.txt	/*scala-credits*
+scala-leader-fr	scala.txt	/*scala-leader-fr*
+scala-leader-fs	scala.txt	/*scala-leader-fs*
+scala-leader-ft	scala.txt	/*scala-leader-ft*
+scala-mappings	scala.txt	/*scala-mappings*
+scala-options	scala.txt	/*scala-options*
+scala.txt	scala.txt	/*scala.txt*
 smartinput	smartinput.txt	/*smartinput*
 smartinput#clear_rules()	smartinput.txt	/*smartinput#clear_rules()*
 smartinput#define_default_rules()	smartinput.txt	/*smartinput#define_default_rules()*

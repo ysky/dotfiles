@@ -15,6 +15,9 @@ if [ $? = 0 ]; then
   eval "$(direnv hook zsh)"
 fi
 
+# go
+export GOPATH=/var/lib/go
+
 # 各サーバの個別設定
 if [ -e ~/.zshenv_local ]; then
   source ~/.zshenv_local

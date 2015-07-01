@@ -9,14 +9,15 @@ if [ $? = 0 ]; then
   eval "$(rbenv init -)"
 fi
 
+# go
+export GOPATH=/var/lib/go
+export PATH="${GOPATH}/bin":$PATH
+
 # direnv
 which direnv > /dev/null 2>&1
 if [ $? = 0 ]; then
   eval "$(direnv hook zsh)"
 fi
-
-# go
-export GOPATH=/var/lib/go
 
 # 各サーバの個別設定
 if [ -e ~/.zshenv_local ]; then

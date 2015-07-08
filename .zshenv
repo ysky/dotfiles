@@ -1,5 +1,5 @@
 # PASH
-export PATH=${HOME}/bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=${HOME}/bin:${HOME}/.bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
 
 # rbenv
 export RBENV_ROOT=/var/lib/rbenv

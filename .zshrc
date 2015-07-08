@@ -145,6 +145,14 @@ if [ -e ~/.zsh/git-completion.bash ]; then
   source ~/.zsh/git-completion.bash
 fi
 
+if [ -e ~/.zsh/complete-mackerel-host-ip.zsh ]; then
+  source ~/.zsh/complete-mackerel-host-ip.zsh
+fi
+
+if [ -e ~/.zsh/peco-select-histry.zsh ]; then
+  source ~/.zsh/peco-select-histry.zsh
+fi
+
 if [ -e ~/.zshrc_local ]; then
   source ~/.zshrc_local
 fi

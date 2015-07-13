@@ -113,8 +113,16 @@ export LESS='-c -i -X -R -F'
 stty stop undef
 
 # alias {{{
-alias ll='ls -l --color=tty'
-alias lla='ls -la --color=tty'
+case ${OSTYPE} in
+  darwin*)
+    alias ll='ls -lG'
+    alias lla='ls -laG'
+  ;;
+  linux*)
+    alias ll='ls -l --color=tty'
+    alias lla='ls -la --color=tty'
+  ;;
+esac
 if [ -e /usr/local/bin/vim ]; then
   alias vi='/usr/local/bin/vim'
   export EDITOR=/usr/local/bin/vim

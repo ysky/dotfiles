@@ -17,7 +17,14 @@ if [ $? = 0 ]; then
 fi
 
 # go
-export GOPATH=/var/lib/go
+case ${OSTYPE} in
+  darwin*)
+    export GOPATH=${HOME}/.go
+  ;;
+  linux*)
+    export GOPATH=/var/lib/go
+  ;;
+esac
 export PATH="${GOPATH}/bin":$PATH
 
 # direnv

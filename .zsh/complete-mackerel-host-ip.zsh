@@ -40,7 +40,7 @@ complete-mackerel-host-ip () {
         modify-current-argument "$ip"
     fi
  
-    BUFFER+=" # $host"
+    BUFFER+="; # $host"
  
     zle reset-prompt
 }

@@ -19,6 +19,9 @@ setopt NOBGNICE
 ## restart running processes on exit
 #setopt HUP
 
+# zsh version info
+autoload -Uz is-at-least
+
 # history {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=500000
@@ -60,14 +63,16 @@ REPORTTIME=3
 setopt transient_rprompt
 
 # vcs_info
-autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*'     formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*'     actionformats '[%b|%a]'
-precmd () { vcs_info }
-RPROMPT='${vcs_info_msg_0_}'${RPROMPT}
+if is-at-least 4.3.10; then
+  autoload -Uz vcs_info
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+  zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+  zstyle ':vcs_info:*'     formats "%F{green}%c%u[%b]%f"
+  zstyle ':vcs_info:*'     actionformats '[%b|%a]'
+  precmd () { vcs_info }
+  RPROMPT='${vcs_info_msg_0_}'${RPROMPT}
+fi
 # }}}
 
 # 履歴の前方一致検索

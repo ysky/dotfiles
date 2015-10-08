@@ -30,6 +30,7 @@ NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
 NeoBundle "derekwyatt/vim-scala"
 NeoBundle "mxw/vim-jsx"
+NeoBundle "othree/yajs.vim"
 
 call neobundle#end()
 filetype plugin indent on

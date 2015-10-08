@@ -377,3 +377,5 @@ call smartinput#define_rule({
 " settings for vim-markdown {{{
 let g:vim_markdown_folding_disabled=1
 " }}}
+
+au BufNewFile,BufRead *.es6 setf javascript

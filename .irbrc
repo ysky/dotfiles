@@ -3,8 +3,8 @@ require "irb/ext/save-history"
 begin
   require "awesome_print"
   AwesomePrint.irb!
-rescue
-  puts "not found awesome_print."
+rescue LoadError
+  # do nothing
 end
 
 IRB.conf[:SAVE_HISTORY] = 100000

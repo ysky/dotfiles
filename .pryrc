@@ -2,7 +2,7 @@ require "irb/completion"
 begin
   require "awesome_print"
   AwesomePrint.pry!
-rescue
+rescue LoadError
   puts "not found awesome_print."
 end
 

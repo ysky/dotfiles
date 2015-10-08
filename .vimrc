@@ -2,6 +2,9 @@
 " vim: foldcolumn=3
 " vim: foldlevel=0
 
+" macではshared/.vimrcでdefault offになっているので修正
+set modelines=1
+
 " settings for neobundle "{{{
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('~/.vim/bundle/'))

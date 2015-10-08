@@ -29,6 +29,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
 NeoBundle "derekwyatt/vim-scala"
+NeoBundle "mxw/vim-jsx"
 
 call neobundle#end()
 filetype plugin indent on

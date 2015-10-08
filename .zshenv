@@ -33,6 +33,10 @@ if [ $? = 0 ]; then
   eval "$(direnv hook zsh)"
 fi
 
+# nodebew
+export NODEBREW_ROOT="${HOME}/.nodebrew"
+export PATH="${NODEBREW_ROOT}/current/bin:${PATH}"
+
 # 各サーバの個別設定
 if [ -e ~/.zshenv_local ]; then
   source ~/.zshenv_local

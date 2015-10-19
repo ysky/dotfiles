@@ -1,4 +1,4 @@
-a{
+{
   "Keymap": {
     "M-f": "peco.ForwardWord",
     "M-b": "peco.BackwardWord",

@@ -12,6 +12,7 @@ unite-outline
 unite.vim
 vim-coffee-script
 vim-indent-guides
+vim-javascript
 vim-jsx
 vim-markdown
 vim-puppet

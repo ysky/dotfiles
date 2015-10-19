@@ -31,6 +31,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle "kana/vim-smartinput"
 NeoBundle "cohama/vim-smartinput-endwise"
+NeoBundle "pangloss/vim-javascript"
 NeoBundle "derekwyatt/vim-scala"
 NeoBundle "mxw/vim-jsx"
 NeoBundle "othree/yajs.vim"

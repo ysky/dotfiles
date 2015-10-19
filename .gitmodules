@@ -70,3 +70,9 @@
 [submodule ".vim/bundle/yajs.vim"]
 	path = .vim/bundle/yajs.vim
 	url = https://github.com/othree/yajs.vim
+[submodule "vim-javascript"]
+	path = vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule ".vim/bundle/vim-javascript"]
+	path = .vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git

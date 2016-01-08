@@ -17,7 +17,7 @@ NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Align'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'ervandew/supertab'
+"NeoBundle 'ervandew/supertab'
 NeoBundle 'ruby-matchit'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'plasticboy/vim-markdown'
@@ -35,6 +35,12 @@ NeoBundle "pangloss/vim-javascript"
 NeoBundle "derekwyatt/vim-scala"
 NeoBundle "mxw/vim-jsx"
 NeoBundle "othree/yajs.vim"
+NeoBundle "Shougo/vimproc", {
+\ 'build' : {
+\   'mac' : 'make -f make_mac.mak',
+\   'unix' : 'make -f make_unix.mak',
+\ },
+\ }
 
 call neobundle#end()
 filetype plugin indent on

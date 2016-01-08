@@ -79,3 +79,6 @@
 [submodule ".vim/bundle/vimproc"]
 	path = .vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule ".vim/bundle/neocomplete-rsense.vim"]
+	path = .vim/bundle/neocomplete-rsense.vim
+	url = https://github.com/supermomonga/neocomplete-rsense.vim

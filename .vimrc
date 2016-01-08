@@ -42,6 +42,11 @@ NeoBundle "Shougo/vimproc", {
 \ },
 \ }
 
+NeoBundleLazy "supermomonga/neocomplete-rsense.vim", {'autoload': {
+\ 'insert' : 1,
+\ 'filetypes' : 'ruby',
+\ }}
+
 call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck

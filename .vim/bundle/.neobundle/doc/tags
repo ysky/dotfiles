@@ -356,6 +356,7 @@ g:neobundle_default_hg_protocol	neobundle.txt	/*g:neobundle_default_hg_protocol*
 g:neobundle_default_site	neobundle.txt	/*g:neobundle_default_site*
 g:neobundle_log_filename	neobundle.txt	/*g:neobundle_log_filename*
 g:neobundle_rm_command	neobundle.txt	/*g:neobundle_rm_command*
+g:neocomplete#sources#rsense#home_directory	neocomplete-rsense.txt	/*g:neocomplete#sources#rsense#home_directory*
 g:neomru#directory_mru_ignore_pattern	neomru.txt	/*g:neomru#directory_mru_ignore_pattern*
 g:neomru#directory_mru_limit	neomru.txt	/*g:neomru#directory_mru_limit*
 g:neomru#directory_mru_path	neomru.txt	/*g:neomru#directory_mru_path*
@@ -669,6 +670,17 @@ neobundle-unite-sources	neobundle.txt	/*neobundle-unite-sources*
 neobundle-usage	neobundle.txt	/*neobundle-usage*
 neobundle-variables	neobundle.txt	/*neobundle-variables*
 neobundle.txt	neobundle.txt	/*neobundle.txt*
+neocomplete-rsense-changelog	neocomplete-rsense.txt	/*neocomplete-rsense-changelog*
+neocomplete-rsense-commands	neocomplete-rsense.txt	/*neocomplete-rsense-commands*
+neocomplete-rsense-contents	neocomplete-rsense.txt	/*neocomplete-rsense-contents*
+neocomplete-rsense-examples	neocomplete-rsense.txt	/*neocomplete-rsense-examples*
+neocomplete-rsense-faq	neocomplete-rsense.txt	/*neocomplete-rsense-faq*
+neocomplete-rsense-functions	neocomplete-rsense.txt	/*neocomplete-rsense-functions*
+neocomplete-rsense-install	neocomplete-rsense.txt	/*neocomplete-rsense-install*
+neocomplete-rsense-interface	neocomplete-rsense.txt	/*neocomplete-rsense-interface*
+neocomplete-rsense-introduction	neocomplete-rsense.txt	/*neocomplete-rsense-introduction*
+neocomplete-rsense-variables	neocomplete-rsense.txt	/*neocomplete-rsense-variables*
+neocomplete-rsense.txt	neocomplete-rsense.txt	/*neocomplete-rsense.txt*
 neomru-commands	neomru.txt	/*neomru-commands*
 neomru-contents	neomru.txt	/*neomru-contents*
 neomru-faq	neomru.txt	/*neomru-faq*

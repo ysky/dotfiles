@@ -8,3 +8,7 @@ end
 
 Pry.config.editor = "vim"
 Pry.config.history.file = "~/.irb_history"
+
+# alias
+Pry.config.commands.alias_command "n", "next"
+Pry.config.commands.alias_command "c", "continue"

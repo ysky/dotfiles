@@ -33,6 +33,27 @@ if [ $? = 0 ]; then
   eval "$(direnv hook zsh)"
 fi
 
+# pyenv
+case ${OSTYPE} in
+  darwin*)
+    export PYENV_ROOT=${HOME}/.pyenv
+  ;;
+  linux*)
+    export PYENV_ROOT=/var/lib/pyenv
+  ;;
+esac
+
+which pyenv > /dev/null
+if [ $? = 0 ]; then
+  eval "$(pyenv init -)"
+fi
+
+# pyenv-virtualenv
+which pyenv-virtual-init > /dev/null
+if [ $? = 0 ]; then
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 # nodebew
 export NODEBREW_ROOT="${HOME}/.nodebrew"
 export PATH="${NODEBREW_ROOT}/current/bin:${PATH}"

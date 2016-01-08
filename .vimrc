@@ -77,6 +77,20 @@ if v:version >= 704
   set regexpengine=1
 endif
 
+" カーソルの変更
+if $TERMCAP =~ "screen"
+  let &t_SI .= "\eP\e]50;CursorShape=1\x7\e\\"
+  let &t_EI .= "\eP\e]50;CursorShape=0\x7\e\\"
+elseif &term =~ "xterm"
+  let &t_SI .= "\e]50;CursorShape=1\x7"
+  let &t_EI .= "\e]50;CursorShape=0\x7"
+endif
+
+" 通常モードに戻った時にすぐにカーソルが戻るように
+set timeout
+set timeoutlen=1000
+set ttimeoutlen=10
+
 " }}}
 " settings for folding {{{
 set foldenable

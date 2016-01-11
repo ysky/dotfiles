@@ -1,3 +1,5 @@
-.vim/bundle
+/.vim/bundle/*
+!/.vim/bundle/neobundle.vim
+
 .vim/.netrwhist
 .gitconfig

@@ -13,11 +13,12 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Align'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
-"NeoBundle 'ervandew/supertab'
+NeoBundle 'ervandew/supertab'
 NeoBundle 'ruby-matchit'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'plasticboy/vim-markdown'
@@ -41,11 +42,6 @@ NeoBundle "Shougo/vimproc", {
 \   'unix' : 'make -f make_unix.mak',
 \ },
 \ }
-
-NeoBundleLazy "supermomonga/neocomplete-rsense.vim", {'autoload': {
-\ 'insert' : 1,
-\ 'filetypes' : 'ruby',
-\ }}
 
 call neobundle#end()
 filetype plugin indent on
@@ -403,5 +399,44 @@ call smartinput#define_rule({
 " settings for vim-markdown {{{
 let g:vim_markdown_folding_disabled=1
 " }}}
+" settings for neocomplcache {{{
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : ''
+    \ }
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+"if !exists('g:neocomplcache_force_omni_patterns')
+"  let g:neocomplcache_force_omni_patterns = {}
+"endif
+"let g:neocomplcache_force_omni_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+"" }}}
 
 au BufNewFile,BufRead *.es6 setf javascript

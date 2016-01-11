@@ -438,5 +438,7 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "endif
 "let g:neocomplcache_force_omni_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 "" }}}
-
+" settings for supertab {{{
+let g:SuperTabDefaultCompletionType = "<c-n>"
+" }}}
 au BufNewFile,BufRead *.es6 setf javascript

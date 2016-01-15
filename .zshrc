@@ -22,6 +22,8 @@ setopt NOBGNICE
 # zsh version info
 autoload -Uz is-at-least
 
+setopt extended_glob
+
 # history {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=500000

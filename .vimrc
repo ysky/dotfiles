@@ -52,21 +52,22 @@ NeoBundleCheck
 "  基本設定
 " ----------------------------------------------
 set t_Co=256
-set autoread                   " 他で変更があったら自動で読み込み
-set ai                         " auto indent
-set shiftwidth=2               " インデント幅は2
-set tabstop=2
-set expandtab                  " tabをホワイトスペースにする
-set number                     " 行数を表示
-set backspace=indent,eol,start " バックスペースですべて消せるようにする
-set formatoptions=lmoq         " テキスト整形オプション，マルチバイト系を追加
-set vb t_vb=                   " ビープを鳴らさない
-set nobackup                   " バックアップファイルを作らない
-set nocompatible               " 互換もモードを禁止
-set incsearch
-set clipboard+=unnamed         " OSのクリップボードを使用する
-set pastetoggle=<F10>          " pastemodeのtoggleをF10にわりあて
-syntax on                      " syntax ハイライトをon
+set autoread                    " 他で変更があったら自動で読み込み
+set ai                          " auto indent
+set shiftwidth=2                " インデント幅は2
+set tabstop=2                   " tabの幅は2
+set expandtab                   " tabをホワイトスペースにする
+set number                      " 行数を表示
+set backspace=indent,eol,start  " バックスペースですべて消せるようにする
+set formatoptions=lmoq          " テキスト整形オプション，マルチバイト系を追加
+set vb t_vb=                    " ビープを鳴らさない
+set nobackup                    " バックアップファイルを作らない
+set nocompatible                " 互換もモードを禁止
+set incsearch                   " インクリメント検索
+set clipboard+=unnamed          " OSのクリップボードを使用する
+set pastetoggle=<F10>           " pastemodeのtoggleをF10にわりあて
+set wildmenu wildmode=list:full " vimからファイルを開く時にリスト表示
+syntax on                       " syntax ハイライトをon
 
 " 分割時は右か下に出す．
 set splitright
@@ -439,5 +440,36 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "" }}}
 " settings for supertab {{{
 let g:SuperTabDefaultCompletionType = "<c-n>"
+" }}}
+" settings for cursorline {{{
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+
+  let s:cursorline_lock = 0
+  function! s:auto_cursorline(event)
+    if a:event ==# 'WinEnter'
+      setlocal cursorline
+      let s:cursorline_lock = 2
+    elseif a:event ==# 'WinLeave'
+      setlocal nocursorline
+    elseif a:event ==# 'CursorMoved'
+      if s:cursorline_lock
+        if 1 < s:cursorline_lock
+          let s:cursorline_lock = 1
+        else
+          setlocal nocursorline
+          let s:cursorline_lock = 0
+        endif
+      endif
+    elseif a:event ==# 'CursorHold'
+      setlocal cursorline
+      let s:cursorline_lock = 1
+    endif
+  endfunction
+augroup END
 " }}}
 au BufNewFile,BufRead *.es6 setf javascript

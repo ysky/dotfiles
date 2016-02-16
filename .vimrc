@@ -99,6 +99,10 @@ set timeout
 set timeoutlen=1000
 set ttimeoutlen=10
 
+" C-fでスクロールしきったときに一行になる挙動を修正
+" refs: http://itchyny.hatenablog.com/entry/2016/02/02/210000
+noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
+
 " }}}
 " settings for folding {{{
 set foldenable

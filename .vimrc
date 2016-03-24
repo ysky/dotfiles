@@ -16,6 +16,7 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Align'
+NeoBundle "vim-ruby/vim-ruby"
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'ervandew/supertab'
@@ -456,6 +457,9 @@ augroup vimrc-auto-cursorline
     endif
   endfunction
 augroup END
+" }}}
+" settings for auto-pairs {{{
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '|':'|'}
 " }}}
 " settings for filetype {{{
 au BufNewFile,BufRead *.es6 setf javascript

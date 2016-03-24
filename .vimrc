@@ -30,8 +30,8 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle "kana/vim-smartinput"
-NeoBundle "cohama/vim-smartinput-endwise"
+NeoBundle "tpope/vim-endwise"
+NeoBundle "jiangmiao/auto-pairs"
 NeoBundle "pangloss/vim-javascript"
 NeoBundle "derekwyatt/vim-scala"
 NeoBundle "mxw/vim-jsx"
@@ -381,25 +381,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
-" }}}
-" settings for vim-smartinput {{{
-call smartinput_endwise#define_default_rules()
-call smartinput#map_to_trigger('i', '#', '#', '#')
-call smartinput#define_rule({
-  \   'at'       : '\%#',
-  \   'char'     : '#',
-  \   'input'    : '#{}<Left>',
-  \   'filetype' : ['ruby','slim'],
-  \   'syntax'   : ['Constant', 'Special'],
-  \   })
-
-call smartinput#map_to_trigger('i', '<Bar>', '<Bar>', '<Bar>')
-call smartinput#define_rule({
-  \   'at' : '\({\|\<do\>\)\s*\%#',
-  \   'char' : '<Bar>',
-  \   'input' : '<Bar><Bar><Left>',
-  \   'filetype' : ['ruby', 'slim'],
-  \    })
 " }}}
 " settings for vim-markdown {{{
 let g:vim_markdown_folding_disabled=1

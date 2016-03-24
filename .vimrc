@@ -476,4 +476,7 @@ augroup vimrc-auto-cursorline
   endfunction
 augroup END
 " }}}
+" settings for filetype {{{
 au BufNewFile,BufRead *.es6 setf javascript
+au BufNewFile,BufRead Vagrantfile set filetype=ruby
+" }}}

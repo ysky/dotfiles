@@ -124,11 +124,11 @@ case ${OSTYPE} in
   darwin*)
     alias ll='ls -lG'
     alias lla='ls -laG'
-  ;;
+    ;;
   linux*)
     alias ll='ls -l --color=tty'
     alias lla='ls -la --color=tty'
-  ;;
+    ;;
 esac
 if [ -e /usr/local/bin/vim ]; then
   alias vi='/usr/local/bin/vim'
@@ -154,6 +154,11 @@ function chpwd() {
     echo "$(ls -l | wc -l) items exist in `pwd`"
   fi
 }
+# }}}
+# antigen {{{
+if [ -e ~/.zsh/antigen.zsh ]; then
+  source ~/.zsh/antigen.zsh
+fi
 # }}}
 # include {{{
 if [ -e ~/.zsh/git-completion.bash ]; then

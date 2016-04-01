@@ -162,6 +162,7 @@ if [ -e ~/.zsh/antigen.zsh ]; then
   antigen apply
 
   bindkey "^r" anyframe-widget-put-history
+  bindkey "^k" anyframe-widget-kill
 fi
 # }}}
 # include {{{

@@ -158,6 +158,8 @@ function chpwd() {
 # antigen {{{
 if [ -e ~/.zsh/antigen.zsh ]; then
   source ~/.zsh/antigen.zsh
+  antigen bundle mollifier/anyframe
+  antigen apply
 fi
 # }}}
 # include {{{

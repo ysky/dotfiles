@@ -732,7 +732,7 @@ antigen () {
     # Pre-startup initializations.
     -set-default ANTIGEN_DEFAULT_REPO_URL \
         https://github.com/robbyrussell/oh-my-zsh.git
-    -set-default ADOTDIR $HOME/.antigen
+    -set-default ADOTDIR $HOME/.zsh/antigen
 
     # Setup antigen's own completion.
     compdef _antigen antigen

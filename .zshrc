@@ -160,6 +160,8 @@ if [ -e ~/.zsh/antigen.zsh ]; then
   source ~/.zsh/antigen.zsh
   antigen bundle mollifier/anyframe
   antigen apply
+
+  bindkey "^r" anyframe-widget-put-history
 fi
 # }}}
 # include {{{
@@ -169,10 +171,6 @@ fi
 
 if [ -e ~/.zsh/complete-mackerel-host-ip.zsh ]; then
   source ~/.zsh/complete-mackerel-host-ip.zsh
-fi
-
-if [ -e ~/.zsh/peco-select-histry.zsh ]; then
-  source ~/.zsh/peco-select-histry.zsh
 fi
 
 if [ -e ~/.zshrc_local ]; then

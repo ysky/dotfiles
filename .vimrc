@@ -5,49 +5,105 @@
 " macではshared/.vimrcでdefault offになっているので修正
 set modelines=1
 
-" settings for neobundle "{{{
-set runtimepath+=~/.vim/bundle/neobundle.vim
-call neobundle#begin(expand('~/.vim/bundle/'))
+if &compatible
+  set nocompatible
+endif
 
-" plugins
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Align'
-NeoBundle "vim-ruby/vim-ruby"
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'ruby-matchit'
-NeoBundle 'slim-template/vim-slim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'rodjek/vim-puppet'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'soramugi/auto-ctags.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle "tpope/vim-endwise"
-NeoBundle "jiangmiao/auto-pairs"
-NeoBundle "pangloss/vim-javascript"
-NeoBundle "derekwyatt/vim-scala"
-NeoBundle "mxw/vim-jsx"
-NeoBundle "othree/yajs.vim"
-NeoBundle "Shougo/vimproc", {
-\ 'build' : {
-\   'mac' : 'make -f make_mac.mak',
-\   'unix' : 'make -f make_unix.mak',
-\ },
-\ }
+if v:version >= 704
+" settings for dein {{{
+  set runtimepath^=.vim/dein/repos/github.com/Shougo/dein.vim
 
-call neobundle#end()
-filetype plugin indent on
-NeoBundleCheck
+  call dein#begin(expand('.vim/dein'))
+  call dein#add('Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/neocomplcache.vim')
+  call dein#add('Shougo/unite-outline')
+  call dein#add('Align')
+  call dein#add("vim-ruby/vim-ruby")
+  call dein#add('tpope/vim-rails')
+  call dein#add('tpope/vim-surround')
+  call dein#add('ervandew/supertab')
+  call dein#add('ruby-matchit')
+  call dein#add('slim-template/vim-slim')
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('rodjek/vim-puppet')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('soramugi/auto-ctags.vim')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('AndrewRadev/switch.vim')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('nathanaelkane/vim-indent-guides')
+  call dein#add("tpope/vim-endwise")
+  call dein#add("jiangmiao/auto-pairs")
+  call dein#add("pangloss/vim-javascript")
+  call dein#add("derekwyatt/vim-scala")
+  call dein#add("mxw/vim-jsx")
+  call dein#add("othree/yajs.vim")
+  call dein#add("Shougo/vimproc", {
+  \ 'build' : {
+  \   'mac' : 'make -f make_mac.mak',
+  \   'unix' : 'make -f make_unix.mak',
+  \ }})
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  call dein#end()
+  filetype plugin indent on
+
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
 " }}}
+else
+" settings for neobundle "{{{
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+  call neobundle#begin(expand('~/.vim/bundle/'))
+
+  " plugins
+  NeoBundle 'Shougo/neobundle.vim'
+  NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'Shougo/neomru.vim'
+  NeoBundle 'Shougo/neocomplcache.vim'
+  NeoBundle 'Shougo/unite-outline'
+  NeoBundle 'Align'
+  NeoBundle "vim-ruby/vim-ruby"
+  NeoBundle 'tpope/vim-rails'
+  NeoBundle 'tpope/vim-surround'
+  NeoBundle 'ervandew/supertab'
+  NeoBundle 'ruby-matchit'
+  NeoBundle 'slim-template/vim-slim'
+  NeoBundle 'plasticboy/vim-markdown'
+  NeoBundle 'itchyny/lightline.vim'
+  NeoBundle 'rodjek/vim-puppet'
+  NeoBundle 'kchmck/vim-coffee-script'
+  NeoBundle 'soramugi/auto-ctags.vim'
+  NeoBundle 'scrooloose/nerdtree'
+  NeoBundle 'AndrewRadev/switch.vim'
+  NeoBundle 'tomtom/tcomment_vim'
+  NeoBundle 'nathanaelkane/vim-indent-guides'
+  NeoBundle "tpope/vim-endwise"
+  NeoBundle "jiangmiao/auto-pairs"
+  NeoBundle "pangloss/vim-javascript"
+  NeoBundle "derekwyatt/vim-scala"
+  NeoBundle "mxw/vim-jsx"
+  NeoBundle "othree/yajs.vim"
+  NeoBundle "Shougo/vimproc", {
+  \ 'build' : {
+  \   'mac' : 'make -f make_mac.mak',
+  \   'unix' : 'make -f make_unix.mak',
+  \ },
+  \ }
+
+  call neobundle#end()
+  filetype plugin indent on
+  NeoBundleCheck
+" }}}
+endif
 " settings for base {{{
 " ----------------------------------------------
 "  基本設定
@@ -63,7 +119,6 @@ set backspace=indent,eol,start  " バックスペースですべて消せるよ�
 set formatoptions=lmoq          " テキスト整形オプション，マルチバイト系を追加
 set vb t_vb=                    " ビープを鳴らさない
 set nobackup                    " バックアップファイルを作らない
-set nocompatible                " 互換もモードを禁止
 set incsearch                   " インクリメント検索
 set clipboard+=unnamed          " OSのクリップボードを使用する
 set pastetoggle=<F10>           " pastemodeのtoggleをF10にわりあて

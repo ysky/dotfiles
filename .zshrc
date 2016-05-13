@@ -141,6 +141,10 @@ fi
 alias grep='grep --color=auto'
 alias rmrf='rm -rf'
 alias ctags='ctags -f .tags'
+
+if which gtags > /dev/null 2>&1; then
+  alias gtags="gtags --gtagslabel=pygments"
+fi
 # }}}
 # auto ls {{{
 # cd するたびにllをたたく.ただし50個以上項目がある場合は個数の表示にとどめる

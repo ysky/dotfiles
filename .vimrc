@@ -11,43 +11,14 @@ endif
 
 if v:version >= 704
 " settings for dein {{{
-  set runtimepath^=.vim/dein/repos/github.com/Shougo/dein.vim
+  let s:dein_runtimepath = expand("~/.vim/dein/repos/github.com/Shougo/dein.vim")
+  execute 'set runtimepath^=' . fnamemodify(s:dein_runtimepath, ':p')
 
-  call dein#begin(expand('.vim/dein'))
-  call dein#add('Shougo/dein.vim')
+  call dein#begin(expand('~/.vim/dein'))
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neomru.vim')
-  call dein#add('Shougo/neocomplcache.vim')
-  call dein#add('Shougo/unite-outline')
-  call dein#add('Align')
-  call dein#add("vim-ruby/vim-ruby")
-  call dein#add('tpope/vim-rails')
-  call dein#add('tpope/vim-surround')
-  call dein#add('ervandew/supertab')
-  call dein#add('ruby-matchit')
-  call dein#add('slim-template/vim-slim')
-  call dein#add('plasticboy/vim-markdown')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('rodjek/vim-puppet')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('soramugi/auto-ctags.vim')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('AndrewRadev/switch.vim')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add("tpope/vim-endwise")
-  call dein#add("jiangmiao/auto-pairs")
-  call dein#add("pangloss/vim-javascript")
-  call dein#add("derekwyatt/vim-scala")
-  call dein#add("mxw/vim-jsx")
-  call dein#add("othree/yajs.vim")
-  call dein#add("Shougo/vimproc", {
-  \ 'build' : {
-  \   'mac' : 'make -f make_mac.mak',
-  \   'unix' : 'make -f make_unix.mak',
-  \ }})
+  call dein#load_toml(expand("~/.vim/dein.toml"),      {"lazy": 0})
+  call dein#load_toml(expand("~/.vim/dein_lazy.toml"), {"lazy": 1})
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })

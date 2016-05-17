@@ -63,6 +63,7 @@ else
   NeoBundle "derekwyatt/vim-scala"
   NeoBundle "mxw/vim-jsx"
   NeoBundle "othree/yajs.vim"
+  NeoBundle "tpope/vim-fugitive"
   NeoBundle "Shougo/vimproc", {
   \ 'build' : {
   \   'mac' : 'make -f make_mac.mak',

@@ -70,3 +70,6 @@ repo = "othree/yajs.vim"
 [[plugins]]
 repo = "Shougo/vimproc"
 build = "make"
+
+[[plugins]]
+repo = "tpope/vim-fugitive"

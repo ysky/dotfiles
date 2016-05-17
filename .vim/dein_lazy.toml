@@ -10,5 +10,5 @@ repo = 'Shougo/neomru.vim'
 on_source = ['unite.vim']
 
 [[plugins]]
-repo = 'Shougo/neocomplcache.vim'
+repo = 'Shougo/neocomplete.vim'
 on_i = 1

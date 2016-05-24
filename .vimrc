@@ -95,6 +95,7 @@ set incsearch                   " インクリメント検索
 set clipboard+=unnamed          " OSのクリップボードを使用する
 set pastetoggle=<F10>           " pastemodeのtoggleをF10にわりあて
 set wildmenu wildmode=list:full " vimからファイルを開く時にリスト表示
+set colorcolumn=120
 syntax on                       " syntax ハイライトをon
 
 " 分割時は右か下に出す．

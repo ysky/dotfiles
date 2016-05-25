@@ -73,3 +73,6 @@ build = "make"
 
 [[plugins]]
 repo = "tpope/vim-fugitive"
+
+[[plugins]]
+repo = "scrooloose/syntastic"

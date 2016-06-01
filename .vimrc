@@ -565,10 +565,6 @@ augroup END
 " settings for auto-pairs {{{
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '|':'|'}
 " }}}
-" settings for filetype {{{
-au BufNewFile,BufRead *.es6 setf javascript
-au BufNewFile,BufRead Vagrantfile set filetype=ruby
-" }}}
 " settings for syntastic {{{
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2

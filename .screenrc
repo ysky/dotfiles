@@ -22,7 +22,8 @@ bind v split -v
 #bind L layout show 
 #bind K layout prev
 #bind J layout next
-bind ^Y eval 'command -c layout' 'layout show'
+bind y eval 'command -c layout' 'layout show'
+bind ^y eval 'command -c layout' 'layout show'
 
 # create/remove layout
 bind -c layout c eval 'layout new'    'layout show'
@@ -31,6 +32,18 @@ bind -c layout X eval 'layout remove' 'layout show'
 # change the current layout title or number
 bind -c layout A colon 'layout title '
 bind -c layout N colon 'layout number '
+
+# resize window
+bind e eval "command -c resize" "echo 'Resize Window'"
+bind ^e eval "command -c resize" "echo 'Resize Window'"
+bind -c resize h eval "command -c resize", "resize -h -1"
+bind -c resize l eval "command -c resize", "resize -h +1"
+bind -c resize j eval "command -c resize", "resize -v -1"
+bind -c resize k eval "command -c resize", "resize -v +1"
+bind -c resize ^h eval "command -c resize", "resize -h -1"
+bind -c resize ^l eval "command -c resize", "resize -h +1"
+bind -c resize ^j eval "command -c resize", "resize -v -1"
+bind -c resize ^k eval "command -c resize", "resize -v +1"
 
 # switch layout
 bind -c layout ^N eval 'layout next' 'command -c layout' 'layout show'

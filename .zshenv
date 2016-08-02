@@ -1,5 +1,5 @@
 # PASH
-export PATH=${HOME}/bin:${HOME}/.bin:/sbin:/usr/sbin:/usr/local/sbin:$PATH
+export PATH=${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin/:$PATH
 
 # rbenv
 case ${OSTYPE} in

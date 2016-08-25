@@ -114,14 +114,14 @@ if v:version >= 704
   set regexpengine=1
 endif
 
-" カーソルの変更
-if $TERMCAP =~ "screen"
-  let &t_SI .= "\eP\e]50;CursorShape=1\x7\e\\"
-  let &t_EI .= "\eP\e]50;CursorShape=0\x7\e\\"
-elseif &term =~ "xterm"
-  let &t_SI .= "\e]50;CursorShape=1\x7"
-  let &t_EI .= "\e]50;CursorShape=0\x7"
-endif
+"" カーソルの変更
+"if $TERMCAP =~ "screen"
+"  let &t_SI .= "\eP\e]50;CursorShape=1\x7\e\\"
+"  let &t_EI .= "\eP\e]50;CursorShape=0\x7\e\\"
+"elseif &term =~ "xterm"
+"  let &t_SI .= "\e]50;CursorShape=1\x7"
+"  let &t_EI .= "\e]50;CursorShape=0\x7"
+"endif
 
 " 通常モードに戻った時にすぐにカーソルが戻るように
 set timeout
@@ -566,6 +566,16 @@ augroup END
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '|':'|'}
 " }}}
 " settings for syntastic {{{
+let g:syntastic_javascript_checkers=['eslint']
+" エラー行にsignを表示
 let g:syntastic_enable_signs=1
+" location listを常に更新
+let g:syntastic_always_populate_loc_list=0
+" location listを常に表示
 let g:syntastic_auto_loc_list=2
+" ファイルを開いたときにチェックする
+let g:syntastic_check_on_open=0
+" debug
+" let g:syntastic_debug=1
+" let g:syntastic_debug_file="~/syntastic.log"
 " }}}

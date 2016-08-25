@@ -37,8 +37,8 @@ repo = 'kchmck/vim-coffee-script'
 [[plugins]]
 repo = 'soramugi/auto-ctags.vim'
 
-[[plugins]]
-repo = 'scrooloose/nerdtree'
+# [[plugins]]
+# repo = 'scrooloose/nerdtree'
 
 [[plugins]]
 repo = 'AndrewRadev/switch.vim'
@@ -76,3 +76,6 @@ repo = "tpope/vim-fugitive"
 
 [[plugins]]
 repo = "scrooloose/syntastic"
+
+[[plugins]]
+repo = "pmsorhaindo/syntastic-local-eslint.vim"

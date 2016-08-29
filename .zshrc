@@ -113,7 +113,7 @@ setopt long_list_jobs
 #unsetopt promptcr
 
 export LANG=ja_JP.utf-8
-export TERM=xterm
+export TERM=xterm-256color
 export LESS='-c -i -X -R -F'
 
 # kill terminal lock

@@ -11,14 +11,21 @@ endif
 
 if v:version >= 704
 " settings for dein {{{
-  let s:dein_runtimepath = expand("~/.vim/dein/repos/github.com/Shougo/dein.vim")
+  if has("nvim")
+    let g:python3_host_prog = expand("~/.pyenv/shims/python")
+    let s:config_root = expand("~/.config/nvim/")
+  else
+    let s:config_root = expand("~/.vim/")
+  endif
+
+  let s:dein_runtimepath = s:config_root . "dein/repos/github.com/Shougo/dein.vim"
   execute 'set runtimepath^=' . fnamemodify(s:dein_runtimepath, ':p')
 
-  call dein#begin(expand('~/.vim/dein'))
+  call dein#begin(s:config_root . "dein")
 
   " Add or remove your plugins here:
-  call dein#load_toml(expand("~/.vim/dein.toml"),      {"lazy": 0})
-  call dein#load_toml(expand("~/.vim/dein_lazy.toml"), {"lazy": 1})
+  call dein#load_toml(s:config_root . "dein.toml",      {"lazy": 0})
+  call dein#load_toml(s:config_root . "dein_lazy.toml", {"lazy": 1})
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -126,12 +133,15 @@ endif
 " 通常モードに戻った時にすぐにカーソルが戻るように
 set timeout
 set timeoutlen=1000
-set ttimeoutlen=10
+set ttimeoutlen=0
 
 " C-fでスクロールしきったときに一行になる挙動を修正
 " refs: http://itchyny.hatenablog.com/entry/2016/02/02/210000
 noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
 
+if has("nvim")
+  set mouse="a"
+endif
 " }}}
 " settings for folding {{{
 set foldenable
@@ -566,16 +576,27 @@ augroup END
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '|':'|'}
 " }}}
 " settings for syntastic {{{
-let g:syntastic_javascript_checkers=['eslint']
-" エラー行にsignを表示
-let g:syntastic_enable_signs=1
-" location listを常に更新
-let g:syntastic_always_populate_loc_list=0
-" location listを常に表示
-let g:syntastic_auto_loc_list=2
-" ファイルを開いたときにチェックする
-let g:syntastic_check_on_open=0
-" debug
-" let g:syntastic_debug=1
-" let g:syntastic_debug_file="~/syntastic.log"
+if !has("nvim")
+  let g:syntastic_javascript_checkers=['eslint']
+  " エラー行にsignを表示
+  let g:syntastic_enable_signs=1
+  " location listを常に更新
+  let g:syntastic_always_populate_loc_list=0
+  " location listを常に表示
+  let g:syntastic_auto_loc_list=2
+  " ファイルを開いたときにチェックしない
+  let g:syntastic_check_on_open=0
+  " ファイルを閉じる時にチェックしない
+  let g:syntastic_check_on_wq=0
+  " debug
+  " let g:syntastic_debug=1
+  " let g:syntastic_debug_file="~/syntastic.log"
+endif
+" }}}
+" settings for neomake {{{
+if has("nvim")
+  autocmd! BufWritePost,BufEnter * Neomake
+  let g:neomake_javascript_enabled_makers = ["eslint"]
+  let g:neomake_slim_enabled_makers = ["slimlint"]
+endif
 " }}}

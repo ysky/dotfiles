@@ -12,3 +12,21 @@ on_source = ['unite.vim']
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
 on_i = 1
+if = '''! has('nvim')'''
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+if = '''has('nvim')'''
+
+[[plugins]]
+repo = "scrooloose/syntastic"
+if = '''! has('nvim')'''
+
+[[plugins]]
+repo = "pmsorhaindo/syntastic-local-eslint.vim"
+if = '''! has('nvim')'''
+
+[[plugins]]
+repo = "neomake/neomake"
+if = '''has('nvim')'''

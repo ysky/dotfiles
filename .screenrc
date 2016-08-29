@@ -18,6 +18,8 @@ bind j next
 bind l windowlist -b
 bind v split -v
 
+maptimeout 5
+
 # for layout
 #bind L layout show 
 #bind K layout prev

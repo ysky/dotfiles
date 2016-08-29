@@ -73,9 +73,3 @@ build = "make"
 
 [[plugins]]
 repo = "tpope/vim-fugitive"
-
-[[plugins]]
-repo = "scrooloose/syntastic"
-
-[[plugins]]
-repo = "pmsorhaindo/syntastic-local-eslint.vim"

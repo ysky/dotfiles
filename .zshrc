@@ -130,7 +130,11 @@ case ${OSTYPE} in
     alias lla='ls -la --color=tty'
     ;;
 esac
-if [ -e /usr/local/bin/vim ]; then
+
+if [ -e /usr/local/bin/nvim ]; then
+  alias vi='/usr/local/bin/nvim'
+  export EDITOR=/usr/local/bin/nvim
+elif [ -e /usr/local/bin/vim ]; then
   alias vi='/usr/local/bin/vim'
   export EDITOR=/usr/local/bin/vim
 else

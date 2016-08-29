@@ -12,3 +12,7 @@ do
     ln -Fis "$PWD/$dotfile" $HOME
   fi
 done
+
+# for nvim
+mkdir -p ~/.config
+ln -Fis "$PWD/.vim" ~/.config/nvim

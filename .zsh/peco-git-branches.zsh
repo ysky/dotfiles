@@ -5,4 +5,4 @@ function peco-git-branches(){
 }
 
 zle -N peco-git-branches
-bindkey '^B' peco-git-branches
+bindkey '^b' peco-git-branches

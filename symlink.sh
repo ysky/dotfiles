@@ -16,3 +16,6 @@ done
 # for nvim
 mkdir -p ~/.config
 ln -Fis "$PWD/.vim" ~/.config/nvim
+
+# for git
+git config --global core.excludesfile ~/.gitignore_global

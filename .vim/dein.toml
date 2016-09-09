@@ -74,6 +74,6 @@ build = "make"
 [[plugins]]
 repo = "tpope/vim-fugitive"
 
-# [[plugins]]
-# repo = "kassio/neoterm"
-# if = '''has('nvim')'''
+[[plugins]]
+repo = "kassio/neoterm"
+if = '''has('nvim')'''

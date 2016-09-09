@@ -601,36 +601,40 @@ if has("nvim")
 endif
 " }}}
 " settings for neoterm {{{
-"if has("nvim")
-"  function! neoterm#test#rspec#run(scope)
-"    let path = g:neoterm_use_relative_path ? expand('%') : expand('%:p')
-"    let command = 'rspec'
-"
-"    if a:scope == 'file'
-"      let command .= ' ' . path
-"    elseif a:scope == 'current'
-"      let command .= ' ' . path . ':' . line('.')
-"    endif
-"
-"    return command
-"  endfunction
-"
-"  aug neoterm_test_rspec
-"    au VimEnter,BufRead,BufNewFile *_spec.rb,*_feature.rb call neoterm#test#libs#add('rspec')
-"  aug END
-"
-"  " ren set test lib
-"  nnoremap <silent> ,rn :call neoterm#test#run('all')<cr>
-"  nnoremap <silent> ,rn :call neoterm#test#run('file')<cr>
-"  nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
-"  nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
-"
-"  " Useful maps
-"  " hide/close terminal
-"  nnoremap <silent> ,th :call neoterm#close()<cr>
-"  " clear terminal
-"  nnoremap <silent> ,tl :call neoterm#clear()<cr>
-"  " kills the current job (send a <c-c>)
-"  nnoremap <silent> ,tc :call neoterm#kill()<cr>
-"endif
+if has("nvim")
+  function! neoterm#test#rspec#run(scope)
+    let path = g:neoterm_use_relative_path ? expand('%') : expand('%:p')
+    let command = 'direnv allow; rspec'
+
+    if a:scope == 'file'
+      let command .= ' ' . path
+    elseif a:scope == 'current'
+      let command .= ' ' . path . ':' . line('.')
+    endif
+
+    return command
+  endfunction
+
+  aug neoterm_test_rspec
+    au VimEnter,BufRead,BufNewFile *_spec.rb,*_feature.rb call neoterm#test#libs#add('rspec')
+  aug END
+
+  let g:neoterm_position = 'horizontal'
+
+  " ren set test lib
+  nnoremap <silent> ,rn :call neoterm#test#run('all')<cr>
+  nnoremap <silent> ,rn :call neoterm#test#run('file')<cr>
+  nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
+  nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
+
+  " Useful maps
+  " open terminal
+  nnoremap <silent> ,tt :call neoterm#open()<cr>
+  " hide/close terminal
+  nnoremap <silent> ,th :call neoterm#close()<cr>
+  " clear terminal
+  nnoremap <silent> ,tl :call neoterm#clear()<cr>
+  " kills the current job (send a <c-c>)
+  nnoremap <silent> ,tc :call neoterm#kill()<cr>
+endif
 " }}}

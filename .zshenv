@@ -1,4 +1,5 @@
-# PASH
+# PATH
+typeset -U path PATH
 export PATH=${HOME}/bin:${HOME}/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # rbenv

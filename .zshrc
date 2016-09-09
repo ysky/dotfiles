@@ -182,6 +182,10 @@ if [ -e ~/.zsh/complete-mackerel-host-ip.zsh ]; then
   source ~/.zsh/complete-mackerel-host-ip.zsh
 fi
 
+if [ -e ~/.zsh/peco-git-branches.zsh ]; then
+  source ~/.zsh/peco-git-branches.zsh
+fi
+
 if [ -e ~/.zshrc_local ]; then
   source ~/.zshrc_local
 fi

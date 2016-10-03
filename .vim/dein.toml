@@ -59,10 +59,10 @@ repo = "jiangmiao/auto-pairs"
 repo = "pangloss/vim-javascript"
 
 [[plugins]]
-repo = "derekwyatt/vim-scala"
+repo = "maxmellon/vim-jsx-pretty"
 
 [[plugins]]
-repo = "mxw/vim-jsx"
+repo = "derekwyatt/vim-scala"
 
 [[plugins]]
 repo = "othree/yajs.vim"

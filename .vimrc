@@ -597,7 +597,7 @@ endif
 if has("nvim")
   autocmd! BufWritePost,BufEnter * Neomake
   let g:neomake_javascript_enabled_makers = ["eslint"]
-  let g:neomake_slim_enabled_makers = ["slimlint"]
+  "let g:neomake_slim_enabled_makers = ["slimlint"]
 endif
 " }}}
 " settings for neoterm {{{

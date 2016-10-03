@@ -26,6 +26,7 @@ complete-mackerel-host-ip () {
     fi
  
     res=$(MACKEREL_APIKEY=${apikey:-$MACKEREL_APIKEY} MACKEREL_APIKEY_NAME=${apikey_name:-$MACKEREL_APIKEY_NAME} mkr-hosts-tsv | eval $filter "$query_arg")
+    echo mkr-hosts-tsv
     if [ -z "$res" ]; then
         zle reset-prompt
         return 1

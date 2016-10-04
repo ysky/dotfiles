@@ -6,9 +6,11 @@ repo = 'Align'
 
 [[plugins]]
 repo = "vim-ruby/vim-ruby"
+on_ft = "ruby"
 
 [[plugins]]
 repo = 'tpope/vim-rails'
+on_ft = "ruby"
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -21,6 +23,7 @@ repo = 'ruby-matchit'
 
 [[plugins]]
 repo = 'slim-template/vim-slim'
+on_ft = "slim"
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -33,6 +36,7 @@ repo = 'rodjek/vim-puppet'
 
 [[plugins]]
 repo = 'kchmck/vim-coffee-script'
+on_ft = "coffee"
 
 [[plugins]]
 repo = 'soramugi/auto-ctags.vim'
@@ -57,12 +61,15 @@ repo = "jiangmiao/auto-pairs"
 
 [[plugins]]
 repo = "pangloss/vim-javascript"
+on_ft = ["javascript", "javascript.jsx"]
 
 [[plugins]]
 repo = "maxmellon/vim-jsx-pretty"
+on_ft = ["javascript", "javascript.jsx"]
 
 [[plugins]]
 repo = "derekwyatt/vim-scala"
+on_ft = "scala"
 
 [[plugins]]
 repo = "othree/yajs.vim"

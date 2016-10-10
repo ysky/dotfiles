@@ -64,7 +64,8 @@ repo = "pangloss/vim-javascript"
 on_ft = ["javascript", "javascript.jsx"]
 
 [[plugins]]
-repo = "maxmellon/vim-jsx-pretty"
+#repo = "maxmellon/vim-jsx-pretty"
+repo = "mxw/vim-jsx"
 on_ft = ["javascript", "javascript.jsx"]
 
 [[plugins]]
